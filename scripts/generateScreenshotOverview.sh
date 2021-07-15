@@ -29,6 +29,7 @@ while read line; do
 done < scripts/screenshotCombinations
 echo "</tr>"
 
+#for image in ./build/reports/shot/verification/images/*.png ; do
 for image in $(/bin/ls -1 ./screenshots/gplay/debug/*.png | grep -v _dark_ | grep -v _light_) ; do
     cp $image build/screenshotSummary/
     
