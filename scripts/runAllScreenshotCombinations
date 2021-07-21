@@ -30,7 +30,7 @@ do
         -Pandroid.testInstrumentationRunnerArguments.annotation=com.owncloud.android.utils.ScreenshotTest \
         -Pandroid.testInstrumentationRunnerArguments.COLOR="$color" \
         -Pandroid.testInstrumentationRunnerArguments.DARKMODE="$darkMode" \
-        $classMethod </dev/null > /dev/null
+        $classMethod
         if [[ $? -ne 0 ]]; then
             echo " failed!"
         else 
