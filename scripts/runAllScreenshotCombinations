@@ -16,7 +16,7 @@ fi
 classMethod=$3
 
 resultCode=0
-while read line
+for line in $(grep -v "#" scripts/screenshotCombinations)
 do
     darkMode=$(echo "$line" | cut -d" " -f1)
     color=$(echo "$line" | cut -d" " -f2)
@@ -47,7 +47,7 @@ do
         || resultCode=1 && scripts/uploadReport.sh "$LOG_USERNAME" "$LOG_PASSWORD" "$4" \
         "$1-$darkMode-$color" "Screenshot" "$4" "$GIT_USERNAME" "$GIT_TOKEN"
     fi
-done < <(grep -v "#" scripts/screenshotCombinations)
+done
 
 sed -i s'#<bool name="is_beta">true</bool>#<bool name="is_beta">false</bool>#'g src/main/res/values/setup.xml
 
