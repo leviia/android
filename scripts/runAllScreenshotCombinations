@@ -47,7 +47,7 @@ do
         || resultCode=1 && scripts/uploadReport.sh "$LOG_USERNAME" "$LOG_PASSWORD" "$4" \
         "$1-$darkMode-$color" "Screenshot" "$4" "$GIT_USERNAME" "$GIT_TOKEN"
     fi
-done < scripts/screenshotCombinations
+done < <(grep -v "#" scripts/screenshotCombinations)
 
 sed -i s'#<bool name="is_beta">true</bool>#<bool name="is_beta">false</bool>#'g src/main/res/values/setup.xml
 

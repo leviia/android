@@ -29,7 +29,6 @@ while read line; do
 done < scripts/screenshotCombinations
 echo "</tr>"
 
-#for image in ./build/reports/shot/verification/images/*.png ; do
 for image in $(/bin/ls -1 ./screenshots/gplay/debug/*.png | grep -v _dark_ | grep -v _light_) ; do
     cp $image build/screenshotSummary/
     
@@ -41,7 +40,7 @@ for image in $(/bin/ls -1 ./screenshots/gplay/debug/*.png | grep -v _dark_ | gre
         
         mode=$(echo $line | cut -d" " -f1)
         color=$(echo $line | cut -d" " -f2)
-        name=$(basename $image| sed s"/\.png/_light_$color\.png/")
+        name=$(basename $image| sed s"/\.png/_${mode}_$color\.png/")
         
         # if image does not exist
         if [ ! -e ./build/reports/shot/verification/images/$name ]; then
