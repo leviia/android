@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 ## $1 noCI/stable/master: wether to run deleteOutdatedComments.sh or uploadReport.sh
 ## $2 true/false: record or verify screenshots
