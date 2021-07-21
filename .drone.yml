@@ -5,6 +5,7 @@ name: allScreenshots
 steps:
   - name: runAllScreenshots
     image: nextcloudci/android8:android-61
+    privileged: true
     environment:
       GIT_USERNAME:
         from_secret: GIT_USERNAME
