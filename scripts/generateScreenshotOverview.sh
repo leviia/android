@@ -65,4 +65,3 @@ done
 echo "</table>"
 
 echo "ERROR: $error"
-exit $error
