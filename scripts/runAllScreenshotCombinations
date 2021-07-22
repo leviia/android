@@ -24,7 +24,7 @@ do
     echo -n "Run $color on $darkMode mode"
 
     if [[ $1 = "noCI" ]]; then
-        ./gradlew 2>/dev/null --offline --console plain gplayDebugExecuteScreenshotTests \
+        ./gradlew --console plain gplayDebugExecuteScreenshotTests \
         $record \
         -Pscreenshot=true \
         -Pandroid.testInstrumentationRunnerArguments.annotation=com.owncloud.android.utils.ScreenshotTest \
@@ -37,7 +37,7 @@ do
             echo
         fi
     else
-        ./gradlew --offline --console plain gplayDebugExecuteScreenshotTests \
+        ./gradlew --console plain gplayDebugExecuteScreenshotTests \
         $record \
         -Pandroid.testInstrumentationRunnerArguments.annotation=com.owncloud.android.utils.ScreenshotTest \
         -Pandroid.testInstrumentationRunnerArguments.COLOR="$color" \
