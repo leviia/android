@@ -18,6 +18,7 @@ steps:
     commands:
       - emulator -avd android -no-snapshot -gpu swiftshader_indirect -no-window -no-audio -skin 500x833 &
       - scripts/wait_for_emulator.sh
+      - ./gradlew --offline --console plain gplayDebugExecuteScreenshotTests -Pscreenshot=true -Pandroid.testInstrumentationRunnerArguments.annotation=com.owncloud.android.utils.ScreenshotTest -Pandroid.testInstrumentationRunnerArguments.COLOR=blue -Pandroid.testInstrumentationRunnerArguments.DARKMODE=light
       - scripts/runAllScreenshotCombinations noCI false
       - mkdir build/screenshotSummary
       - scripts/generateScreenshotOverview.sh > build/screenshotSummary/summary.html
