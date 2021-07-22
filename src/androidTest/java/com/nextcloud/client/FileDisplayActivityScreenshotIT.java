@@ -66,8 +66,8 @@ public class FileDisplayActivityScreenshotIT extends AbstractIT {
         screenshot(sut);
     }
 
-    @Test
-    @ScreenshotTest
+    //@Test
+    //@ScreenshotTest
     public void showMediaThenAllFiles() {
         FileDisplayActivity fileDisplayActivity = activityRule.launchActivity(null);
         OCFileListFragment sut = fileDisplayActivity.getListOfFilesFragment();

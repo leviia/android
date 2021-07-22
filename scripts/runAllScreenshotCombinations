@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 ## $1 noCI/stable/master: wether to run deleteOutdatedComments.sh or uploadReport.sh
 ## $2 true/false: record or verify screenshots
@@ -30,7 +30,7 @@ do
         -Pandroid.testInstrumentationRunnerArguments.annotation=com.owncloud.android.utils.ScreenshotTest \
         -Pandroid.testInstrumentationRunnerArguments.COLOR="$color" \
         -Pandroid.testInstrumentationRunnerArguments.DARKMODE="$darkMode" \
-        $classMethod
+        $classMethod </dev/null > /dev/null
         if [[ $? -ne 0 ]]; then
             echo " failed!"
         else 
