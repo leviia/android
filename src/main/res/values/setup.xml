@@ -5,25 +5,25 @@
     <bool name="dev_version_direct_download_enabled">false</bool>
 
     <!-- App name  and other strings-->
-    <string name="app_name">Nextcloud</string>
-    <string name="account_type">nextcloud</string>     <!-- better if was a domain name; but changing it now would require migrate accounts when the app is updated -->
+    <string name="app_name">${leviia_app_name}</string>
+    <string name="account_type">${leviia_app_idb}</string>     <!-- better if was a domain name; but changing it now would require migrate accounts when the app is updated -->
     <string name="authority">org.nextcloud</string>    <!-- better if was the app package with ".provider" appended ; it identifies the provider -->
     <string name="users_and_groups_search_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
     <string name="users_and_groups_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
     <string name="document_provider_authority">org.nextcloud.documents</string>
     <string name="file_provider_authority">org.nextcloud.files</string>
     <string name="image_cache_provider_authority">org.nextcloud.imageCache.provider</string>
-    <string name="db_file">nextcloud.db</string>
-    <string name="db_name">nextcloud</string>
-    <string name="data_folder">nextcloud</string>
-    <string name="default_display_name_for_root_folder">Nextcloud</string>
-    <string name="nextcloud_user_agent">Mozilla/5.0 (Android) Nextcloud-android/%1$s</string>
-    <string name="only_office_user_agent">Mozilla/5.0 (Android %1$s) Mobile Nextcloud-android/%2$s</string>
+    <string name="db_file">${leviia_app_prefix}.db</string>
+    <string name="db_name">${leviia_app_prefix}</string>
+    <string name="data_folder">${leviia_app_prefix}</string>
+    <string name="default_display_name_for_root_folder">${leviia_app_name}</string>
+    <string name="nextcloud_user_agent">Mozilla/5.0 (Android) ${leviia_app_prefix}-android/%1$s</string>
+    <string name="only_office_user_agent">Mozilla/5.0 (Android %1$s) Mobile ${leviia_app_prefix}-android/%2$s</string>
 
     <!-- URLs and flags related -->
     <bool name="show_server_url_input">true</bool>
     <bool name="show_provider_or_own_installation">true</bool>
-    <string name="provider_registration_server">https://www.nextcloud.com/register</string>
+    <string name="provider_registration_server">${leviia_app_ecommerce}</string>
 
     <!-- Flags to enable/disable some features -->
     <string name="send_files_to_other_apps">on</string>
@@ -43,7 +43,7 @@
     <array name="whatsnew_urls"></array>
 
     <!-- Colors -->
-    <color name="primary">#0082c9</color>
+    <color name="primary">${leviia_app_color}</color>
     <color name="primary_dark">#006AA3</color>
     <color name="color_accent">#007cc2</color>
     <color name="login_text_color">#ffffff</color>
@@ -73,7 +73,7 @@
     <bool name="recommend_enabled">true</bool>
     <bool name="logger_enabled">false</bool>
     <bool name="sourcecode_enabled">true</bool>
-    <string name="sourcecode_url" translatable="false">https://github.com/nextcloud/android</string>
+    <string name="sourcecode_url" translatable="false">https://github.com/leviia/android</string>
     <bool name="license_enabled">true</bool>
     <string name="license_url" translatable="false">https://www.gnu.org/licenses/gpl-2.0.html</string>
     <string name="url_imprint"></string>
@@ -122,5 +122,3 @@
 
     <string name="buildNumber" translatable="false"></string>
 </resources>
-
-

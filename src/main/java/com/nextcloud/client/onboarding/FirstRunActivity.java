@@ -113,7 +113,7 @@ public class FirstRunActivity extends BaseActivity implements ViewPager.OnPageCh
 
         TextView hostOwnServerTextView = findViewById(R.id.host_own_server);
         hostOwnServerTextView.setTextColor(getResources().getColor(R.color.login_text_color));
-        hostOwnServerTextView.setVisibility(isProviderOrOwnInstallationVisible ? View.VISIBLE : View.GONE);
+        hostOwnServerTextView.setVisibility(View.GONE);
 
         progressIndicator = findViewById(R.id.progressIndicator);
         ViewPager viewPager = findViewById(R.id.contentPanel);
@@ -235,8 +235,8 @@ public class FirstRunActivity extends BaseActivity implements ViewPager.OnPageCh
     public static FeatureItem[] getFirstRun() {
         return new FeatureItem[]{
                 new FeatureItem(R.drawable.logo, R.string.first_run_1_text, R.string.empty, true, false),
-                new FeatureItem(R.drawable.first_run_files, R.string.first_run_2_text, R.string.empty, true, false),
-                new FeatureItem(R.drawable.first_run_groupware, R.string.first_run_3_text, R.string.empty, true, false),
-                new FeatureItem(R.drawable.first_run_talk, R.string.first_run_4_text, R.string.empty, true, false)};
+                new FeatureItem(R.drawable.first_run_files, R.string.first_run_2_text, R.string.empty, true, false)};
+                // new FeatureItem(R.drawable.first_run_groupware, R.string.first_run_3_text, R.string.empty, true, false),
+                // new FeatureItem(R.drawable.first_run_talk, R.string.first_run_4_text, R.string.empty, true, false)};
     }
 }
