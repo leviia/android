@@ -75,16 +75,17 @@
 			android:title="@string/prefs_e2e_mnemonic"
 			android:key="mnemonic"
 			android:summary="Displays your E2E 12 words passphrase" />
-		<Preference android:title="@string/prefs_help" android:key="help" />
+		<!-- <Preference android:title="@string/prefs_help" android:key="help" android:visible="false" /> -->
 		<Preference android:title="@string/prefs_recommend" android:key="recommend" />
-		<Preference android:title="@string/logs_title" android:key="logger" />
+		<!-- <Preference android:title="@string/logs_title" android:key="logger" android:visible="false"/> -->
 		<Preference android:title="@string/prefs_imprint" android:key="imprint" />
 	</PreferenceCategory>
 	<PreferenceCategory android:title="@string/prefs_category_about" android:key="about">
-		<Preference
+		<!-- <Preference
 			android:title="@string/privacy"
 			android:id="@+id/privacy"
-			android:key="privacy"/>
+			android:key="privacy"
+			android:visible="false"/> -->
 		<Preference
 			android:title="@string/prefs_sourcecode"
 			android:id="@+id/sourcecode"

@@ -22,6 +22,7 @@ export leviia_app_idb=com.$leviia_app_prefix.$subname
 
 parse_env src/main/res/layout/account_setup.xml
 parse_env src/main/res/values/setup.xml
+parse_env build.gradle
 
 ./gradlew assembleGenericDebug
 
