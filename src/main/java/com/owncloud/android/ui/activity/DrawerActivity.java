@@ -306,34 +306,34 @@ public abstract class DrawerActivity extends ToolbarActivity
             LinearLayout drawerHeader = mNavigationViewHeader.findViewById(R.id.drawer_header_view);
             drawerHeader.setBackgroundColor(ThemeColorUtils.unchangedPrimaryColor(getAccount(), this));
 
-            if (!TextUtils.isEmpty(logo) && URLUtil.isValidUrl(logo)) {
-                // background image
-                GenericRequestBuilder<Uri, InputStream, SVGorImage, Bitmap> requestBuilder = Glide.with(this)
-                    .using(Glide.buildStreamModelLoader(Uri.class, this), InputStream.class)
-                    .from(Uri.class)
-                    .as(SVGorImage.class)
-                    .transcode(new SvgOrImageBitmapTranscoder(128, 128), Bitmap.class)
-                    .sourceEncoder(new StreamEncoder())
-                    .cacheDecoder(new FileToStreamDecoder<>(new SvgOrImageDecoder()))
-                    .decoder(new SvgOrImageDecoder());
-
-                // background image
-                SimpleTarget target = new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
-                        Drawable[] drawables = {new ColorDrawable(primaryColor), new BitmapDrawable(resource)};
-                        LayerDrawable layerDrawable = new LayerDrawable(drawables);
-
-                        String name = capability.getServerName();
-                        setDrawerHeaderLogo(layerDrawable, name);
-                    }
-                };
-
-                requestBuilder
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .load(Uri.parse(logo))
-                    .into(target);
-            }
+            // if (!TextUtils.isEmpty(logo) && URLUtil.isValidUrl(logo)) {
+            //     // background image
+            //     GenericRequestBuilder<Uri, InputStream, SVGorImage, Bitmap> requestBuilder = Glide.with(this)
+            //         .using(Glide.buildStreamModelLoader(Uri.class, this), InputStream.class)
+            //         .from(Uri.class)
+            //         .as(SVGorImage.class)
+            //         .transcode(new SvgOrImageBitmapTranscoder(128, 128), Bitmap.class)
+            //         .sourceEncoder(new StreamEncoder())
+            //         .cacheDecoder(new FileToStreamDecoder<>(new SvgOrImageDecoder()))
+            //         .decoder(new SvgOrImageDecoder());
+            //
+            //     // background image
+            //     SimpleTarget target = new SimpleTarget<Bitmap>() {
+            //         @Override
+            //         public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
+            //             Drawable[] drawables = {new ColorDrawable(primaryColor), new BitmapDrawable(resource)};
+            //             LayerDrawable layerDrawable = new LayerDrawable(drawables);
+            //
+            //             String name = capability.getServerName();
+            //             setDrawerHeaderLogo(layerDrawable, name);
+            //         }
+            //     };
+            //
+            //     requestBuilder
+            //         .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+            //         .load(Uri.parse(logo))
+            //         .into(target);
+            // }
         }
     }
 
@@ -360,7 +360,7 @@ public abstract class DrawerActivity extends ToolbarActivity
         }
 
     }
-    
+
     /**
      * setup drawer header, basically the logo color
      */
