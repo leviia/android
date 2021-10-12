@@ -26,4 +26,5 @@ parse_env build.gradle
 
 ./gradlew assembleGenericDebug
 
-adb install build/outputs/apk/generic/debug/generic-debug-30180000.apk
+#adb install build/outputs/apk/generic/debug/generic-debug-30180000.apk
+mv build/outputs/apk/generic/debug/generic-debug-30180000.apk .
