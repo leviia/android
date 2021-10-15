@@ -31,6 +31,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
+import com.nextcloud.client.account.User;
 import com.owncloud.android.MainApp;
 import com.owncloud.android.R;
 import com.owncloud.android.datamodel.FileDataStorageManager;
@@ -262,9 +263,7 @@ public final class FileStorageUtils {
     public static List<OCFile> sortOcFolderDescDateModifiedWithoutFavoritesFirst(List<OCFile> files) {
         final int multiplier = -1;
         Collections.sort(files, (o1, o2) -> {
-            @SuppressFBWarnings(value = "Bx", justification = "Would require stepping up API level")
-            Long obj1 = o1.getModificationTimestamp();
-            return multiplier * obj1.compareTo(o2.getModificationTimestamp());
+            return multiplier * Long.compare(o1.getModificationTimestamp(),o2.getModificationTimestamp());
         });
 
         return files;
@@ -333,12 +332,12 @@ public final class FileStorageUtils {
      * This should be changed in the near future to avoid any chance of data loss, but we need to add some options
      * to limit hard automatic synchronizations to wifi, unless the user wants otherwise.
      *
-     * @param file      File to associate a possible 'lost' local file.
-     * @param account   Account holding file.
+     * @param file         File to associate a possible 'lost' local file.
+     * @param accountName  File owner account name.
      */
-    public static void searchForLocalFileInDefaultPath(OCFile file, Account account) {
+    public static void searchForLocalFileInDefaultPath(OCFile file, String accountName) {
         if ((file.getStoragePath() == null || !new File(file.getStoragePath()).exists()) && !file.isFolder()) {
-            File f = new File(FileStorageUtils.getDefaultSavePathFor(account.name, file));
+            File f = new File(FileStorageUtils.getDefaultSavePathFor(accountName, file));
             if (f.exists()) {
                 file.setStoragePath(f.getAbsolutePath());
                 file.setLastSyncDateForData(f.lastModified());

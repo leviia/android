@@ -424,6 +424,7 @@
     <string name="menu_item_sort_by_name_z_a">Z - A</string>
     <string name="menu_item_sort_by_size_biggest_first">Més gran primer</string>
     <string name="menu_item_sort_by_size_smallest_first">Més petit primer</string>
+    <string name="more">Més</string>
     <string name="move_file_error">Hi ha hagut un error mentre es movia aquest fitxer o carpeta</string>
     <string name="move_file_invalid_into_descendent">No és possible moure una carpeta en una de les seves pròpies carpetes</string>
     <string name="move_file_invalid_overwrite">Aquest fitxer ja existeix a la carpeta de destinació</string>
@@ -682,6 +683,7 @@
     <string name="stream">Seqüència amb…</string>
     <string name="stream_not_possible_headline">La seqüenciació interna no és possible</string>
     <string name="stream_not_possible_message">Si us plau, descarregueu el mèdia o useu una aplicació externa.</string>
+    <string name="strict_mode">Mode estricte: no es permet la connexió HTTP.</string>
     <string name="subject_shared_with_you">\"%1$s\" us ha estat compartit</string>
     <string name="subject_user_shared_with_you">%1$s us ha compartit %2$s</string>
     <string name="sync_conflicts_in_favourites_ticker">S\'han trobat conflictes</string>
@@ -829,7 +831,7 @@
     <string name="what_s_new_image">Imatge de novetats</string>
     <string name="whats_new_skip">Omet</string>
     <string name="whats_new_title">Nou a %1$s</string>
-    <string name="whats_your_status">Quin és el teu estat?</string>
+    <string name="whats_your_status">Quin és el vostre estat?</string>
     <string name="wrong_storage_path">La carpeta de dades no existeix!</string>
     <string name="wrong_storage_path_desc">Això podria ser degut a una còpia de seguretat restaurada per un altre dispositiu. Revertint a la configuració per defecte. Si us plau, comprova els paràmetres per seleccionar la carpeta de dades.</string>
     <plurals name="sync_fail_in_favourites_content">
