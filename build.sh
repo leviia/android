@@ -7,6 +7,9 @@ function parse_env {
   cat $originalfile | envsubst "$(printf '${%s} ' ${!leviia*})" > $tmpfile &&  mv $tmpfile $originalfile
 }
 
+git checkout src/
+git clean -f
+
 export leviia_app_color='#00BC73'
 
 export leviia_app_name=Leviia
@@ -18,6 +21,13 @@ export leviia_app_build_version="4"
 #do not put the same base adress unless you love bugs
 export leviia_app_domain_name=cloud.leviia.com
 export leviia_app_ecommerce=https://www.leviia.com
+
+if [[ $# > 0 ]]; then
+echo "Building branding $1"
+source ./brandings/$1/env.sh
+./brandings/$1/env.sh
+fi
+
 export leviia_app_idb=com.$leviia_app_prefix.$subname
 
 parse_env src/main/res/layout/account_setup.xml

@@ -53,3 +53,4 @@ fastlane/Fastfile
 
 node_modules/*
 package-lock.json
+brandings/*
