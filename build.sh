@@ -34,7 +34,6 @@ parse_env src/main/res/layout/account_setup.xml
 parse_env src/main/res/values/setup.xml
 parse_env build.gradle
 
-./gradlew assembleGenericDebug
+./gradlew assembleGenericRelease
 
-#adb install build/outputs/apk/generic/debug/generic-debug-30180000.apk
-mv build/outputs/apk/generic/debug/generic-debug-30180000.apk .
+mv build/outputs/apk/generic/release/generic-release-30180000.apk .
