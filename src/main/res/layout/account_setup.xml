@@ -83,7 +83,7 @@
                         android:paddingEnd="@dimen/alternate_padding_right"
                         android:scrollbars="vertical"
                         android:textColor="@color/login_text_color"
-                        android:text="cloud.leviia.com">
+                        android:text="${leviia_app_domain_name}">
 
                         <requestFocus />
 

@@ -50,3 +50,7 @@ fastlane/Fastfile
 /fastlane/vendor/
 /.bundle/
 /fastlane/.bundle/
+
+node_modules/*
+package-lock.json
+brandings/*
