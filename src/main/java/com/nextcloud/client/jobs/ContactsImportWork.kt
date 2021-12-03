@@ -29,8 +29,8 @@ import android.provider.ContactsContract
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.nextcloud.client.logger.Logger
-import com.owncloud.android.ui.fragment.contactsbackup.ContactListFragment
-import com.owncloud.android.ui.fragment.contactsbackup.ContactListFragment.VCardComparator
+import com.owncloud.android.ui.fragment.contactsbackup.BackupListFragment
+import com.owncloud.android.ui.fragment.contactsbackup.VCardComparator
 import ezvcard.Ezvcard
 import ezvcard.VCard
 import third_parties.ezvcard_android.ContactOperations
@@ -70,7 +70,10 @@ class ContactsImportWork(
         try {
             val operations = ContactOperations(applicationContext, contactsAccountName, contactsAccountType)
             vCards.addAll(Ezvcard.parse(file).all())
-            Collections.sort(vCards, VCardComparator())
+            Collections.sort(
+                vCards,
+                VCardComparator()
+            )
             cursor = contentResolver.query(
                 ContactsContract.Contacts.CONTENT_URI,
                 null,
@@ -84,14 +87,14 @@ class ContactsImportWork(
                 for (i in 0 until cursor.count) {
                     val vCard = getContactFromCursor(cursor)
                     if (vCard != null) {
-                        ownContactMap[vCard] = cursor.getLong(cursor.getColumnIndex("NAME_RAW_CONTACT_ID"))
+                        ownContactMap[vCard] = cursor.getLong(cursor.getColumnIndexOrThrow("NAME_RAW_CONTACT_ID"))
                     }
                     cursor.moveToNext()
                 }
             }
             for (contactIndex in selectedContactsIndices) {
                 val vCard = vCards[contactIndex]
-                if (ContactListFragment.getDisplayName(vCard).isEmpty()) {
+                if (BackupListFragment.getDisplayName(vCard).isEmpty()) {
                     if (!ownContactMap.containsKey(vCard)) {
                         operations.insertContact(vCard)
                     } else {
@@ -111,7 +114,7 @@ class ContactsImportWork(
     }
 
     private fun getContactFromCursor(cursor: Cursor): VCard? {
-        val lookupKey = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY))
+        val lookupKey = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts.LOOKUP_KEY))
         val uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_VCARD_URI, lookupKey)
         var vCard: VCard? = null
         try {

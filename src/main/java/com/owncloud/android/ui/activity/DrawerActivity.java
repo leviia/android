@@ -4,12 +4,14 @@
  * @author Andy Scherzinger
  * @author Tobias Kaminsky
  * @author Chris Narkiewicz  <hello@ezaquarii.com>
+ * @author TSI-mc
  * Copyright (C) 2016 Andy Scherzinger
  * Copyright (C) 2017 Tobias Kaminsky
  * Copyright (C) 2016 Nextcloud
  * Copyright (C) 2016 ownCloud Inc.
  * Copyright (C) 2020 Chris Narkiewicz <hello@ezaquarii.com>
  * Copyright (C) 2020 Infomaniak Network SA
+ * Copyright (C) 2021 TSI-mc
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -39,7 +41,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -98,10 +99,12 @@ import com.owncloud.android.ui.events.AccountRemovedEvent;
 import com.owncloud.android.ui.events.ChangeMenuEvent;
 import com.owncloud.android.ui.events.DummyDrawerEvent;
 import com.owncloud.android.ui.events.SearchEvent;
+import com.owncloud.android.ui.fragment.FileDetailsSharingProcessFragment;
 import com.owncloud.android.ui.fragment.GalleryFragment;
 import com.owncloud.android.ui.fragment.OCFileListFragment;
 import com.owncloud.android.ui.preview.PreviewTextStringFragment;
 import com.owncloud.android.ui.trashbin.TrashbinActivity;
+import com.owncloud.android.utils.BitmapUtils;
 import com.owncloud.android.utils.DisplayUtils;
 import com.owncloud.android.utils.DrawerMenuUtil;
 import com.owncloud.android.utils.FilesSyncHelper;
@@ -132,6 +135,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 /**
  * Base class to handle setup of the drawer implementation including user switching and avatar fetching and fallback
@@ -146,6 +150,7 @@ public abstract class DrawerActivity extends ToolbarActivity
     private static final int ACTION_MANAGE_ACCOUNTS = 101;
     private static final int MENU_ORDER_EXTERNAL_LINKS = 3;
     private static final int MENU_ITEM_EXTERNAL_LINK = 111;
+    private static final int MAX_LOGO_SIZE_PX = 1000;
 
     /**
      * Reference to the drawer layout.
@@ -316,19 +321,28 @@ public abstract class DrawerActivity extends ToolbarActivity
             //         .sourceEncoder(new StreamEncoder())
             //         .cacheDecoder(new FileToStreamDecoder<>(new SvgOrImageDecoder()))
             //         .decoder(new SvgOrImageDecoder());
-            //
+
             //     // background image
             //     SimpleTarget target = new SimpleTarget<Bitmap>() {
             //         @Override
             //         public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
-            //             Drawable[] drawables = {new ColorDrawable(primaryColor), new BitmapDrawable(resource)};
+
+            //             Bitmap logo = resource;
+            //             int width = resource.getWidth();
+            //             int height = resource.getHeight();
+            //             int max = Math.max(width, height);
+            //             if (max > MAX_LOGO_SIZE_PX) {
+            //                 logo = BitmapUtils.scaleBitmap(resource, MAX_LOGO_SIZE_PX, width, height, max);
+            //             }
+
+            //             Drawable[] drawables = {new ColorDrawable(primaryColor), new BitmapDrawable(logo)};
             //             LayerDrawable layerDrawable = new LayerDrawable(drawables);
-            //
+
             //             String name = capability.getServerName();
             //             setDrawerHeaderLogo(layerDrawable, name);
             //         }
             //     };
-            //
+
             //     requestBuilder
             //         .diskCacheStrategy(DiskCacheStrategy.SOURCE)
             //         .load(Uri.parse(logo))
@@ -390,7 +404,7 @@ public abstract class DrawerActivity extends ToolbarActivity
     }
 
     private void filterDrawerMenu(final Menu menu, @NonNull final User user) {
-        FileDataStorageManager storageManager = new FileDataStorageManager(user.toPlatformAccount(),
+        FileDataStorageManager storageManager = new FileDataStorageManager(user,
                                                                            getContentResolver());
         OCCapability capability = storageManager.getCapability(user.getAccountName());
 
@@ -403,9 +417,6 @@ public abstract class DrawerActivity extends ToolbarActivity
         DrawerMenuUtil.removeMenuItem(menu, R.id.nav_community,
                                       !getResources().getBoolean(R.bool.participate_enabled));
         DrawerMenuUtil.removeMenuItem(menu, R.id.nav_shared, !getResources().getBoolean(R.bool.shared_enabled));
-        DrawerMenuUtil.removeMenuItem(menu, R.id.nav_contacts, !getResources().getBoolean(R.bool.contacts_backup)
-            || !getResources().getBoolean(R.bool.show_drawer_contacts_backup));
-
         DrawerMenuUtil.removeMenuItem(menu, R.id.nav_logout, !getResources().getBoolean(R.bool.show_drawer_logout));
     }
 
@@ -450,8 +461,6 @@ public abstract class DrawerActivity extends ToolbarActivity
             startActivity(ActivitiesActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
         } else if (itemId == R.id.nav_notifications) {
             startActivity(NotificationsActivity.class);
-        } else if (itemId == R.id.nav_contacts) {
-            ContactsPreferenceActivity.startActivity(this);
         } else if (itemId == R.id.nav_settings) {
             startActivity(SettingsActivity.class);
         } else if (itemId == R.id.nav_community) {
@@ -972,7 +981,13 @@ public abstract class DrawerActivity extends ToolbarActivity
             closeDrawer();
             return;
         }
-        super.onBackPressed();
+        Fragment fileDetailsSharingProcessFragment =
+            getSupportFragmentManager().findFragmentByTag(FileDetailsSharingProcessFragment.TAG);
+        if (fileDetailsSharingProcessFragment != null) {
+            ((FileDetailsSharingProcessFragment) fileDetailsSharingProcessFragment).onBackPressed();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -996,8 +1011,7 @@ public abstract class DrawerActivity extends ToolbarActivity
                 setAccount(accountManager.getCurrentAccount(), false);
                 restart();
             }
-        } else if (requestCode == PassCodeManager.PASSCODE_ACTIVITY &&
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && data != null) {
+        } else if (requestCode == PassCodeManager.PASSCODE_ACTIVITY && data != null) {
             int result = data.getIntExtra(RequestCredentialsActivity.KEY_CHECK_RESULT,
                                           RequestCredentialsActivity.KEY_CHECK_RESULT_FALSE);
 

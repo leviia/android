@@ -31,8 +31,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.nextcloud.android.lib.resources.profile.Action;
+import com.nextcloud.android.lib.resources.profile.HoverCard;
 import com.nextcloud.client.account.RegisteredUser;
 import com.nextcloud.client.account.Server;
+import com.nextcloud.client.account.User;
+import com.nextcloud.client.account.UserAccountManager;
 import com.nextcloud.client.device.DeviceInfo;
 import com.nextcloud.ui.ChooseAccountDialogFragment;
 import com.owncloud.android.AbstractIT;
@@ -54,6 +58,7 @@ import com.owncloud.android.lib.resources.users.StatusType;
 import com.owncloud.android.ui.activity.FileDisplayActivity;
 import com.owncloud.android.ui.fragment.OCFileListBottomSheetActions;
 import com.owncloud.android.ui.fragment.OCFileListBottomSheetDialog;
+import com.owncloud.android.ui.fragment.ProfileBottomSheetDialog;
 import com.owncloud.android.utils.MimeTypeUtil;
 import com.owncloud.android.utils.ScreenshotTest;
 
@@ -64,6 +69,7 @@ import org.junit.Test;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 import androidx.fragment.app.DialogFragment;
@@ -171,6 +177,7 @@ public class DialogFragmentIT extends AbstractIT {
     @Test
     @ScreenshotTest
     public void testAccountChooserDialog() throws AccountUtils.AccountNotFoundException {
+        UserAccountManager userAccountManager = activityRule.getActivity().getUserAccountManager();
         AccountManager accountManager = AccountManager.get(targetContext);
         for (Account account : accountManager.getAccountsByType(MainApp.getAccountType(targetContext))) {
             accountManager.removeAccountExplicitly(account);
@@ -181,7 +188,7 @@ public class DialogFragmentIT extends AbstractIT {
         accountManager.setUserData(newAccount, AccountUtils.Constants.KEY_OC_BASE_URL, SERVER_URL);
         accountManager.setUserData(newAccount, AccountUtils.Constants.KEY_USER_ID, "test");
         accountManager.setAuthToken(newAccount, AccountTypeUtils.getAuthTokenTypePass(newAccount.type), "password");
-
+        User newUser = userAccountManager.getUser(newAccount.name).orElseThrow(RuntimeException::new);
 
         Account newAccount2 = new Account("user1@nextcloud.localhost", MainApp.getAccountType(targetContext));
         accountManager.addAccountExplicitly(newAccount2, "password", null);
@@ -190,8 +197,7 @@ public class DialogFragmentIT extends AbstractIT {
         accountManager.setUserData(newAccount2, AccountUtils.Constants.KEY_OC_VERSION, "20.0.0");
         accountManager.setAuthToken(newAccount2, AccountTypeUtils.getAuthTokenTypePass(newAccount.type), "password");
 
-
-        FileDataStorageManager fileDataStorageManager = new FileDataStorageManager(newAccount,
+        FileDataStorageManager fileDataStorageManager = new FileDataStorageManager(newUser,
                                                                                    targetContext.getContentResolver());
 
         OCCapability capability = new OCCapability();
@@ -253,7 +259,9 @@ public class DialogFragmentIT extends AbstractIT {
         accountManager.setUserData(newAccount, AccountUtils.Constants.KEY_USER_ID, "test");
         accountManager.setAuthToken(newAccount, AccountTypeUtils.getAuthTokenTypePass(newAccount.type), "password");
 
-        FileDataStorageManager fileDataStorageManager = new FileDataStorageManager(newAccount,
+        UserAccountManager userAccountManager = activityRule.getActivity().getUserAccountManager();
+        User newUser = userAccountManager.getUser(newAccount.name).get();
+        FileDataStorageManager fileDataStorageManager = new FileDataStorageManager(newUser,
                                                                                    targetContext.getContentResolver());
 
         OCCapability capability = new OCCapability();
@@ -370,6 +378,47 @@ public class DialogFragmentIT extends AbstractIT {
                                                                           info,
                                                                           user,
                                                                           ocFile);
+
+        fda.runOnUiThread(sut::show);
+
+        waitForIdleSync();
+
+        screenshot(sut.getWindow().getDecorView());
+    }
+
+    @Test
+    @ScreenshotTest
+    public void testProfileBottomSheet() {
+        if (Looper.myLooper() == null) {
+            Looper.prepare();
+        }
+
+        // Fixed values for HoverCard
+        List<Action> actions = new ArrayList<>();
+        actions.add(new Action("profile",
+                               "View profile",
+                               "https://dev.nextcloud.com/core/img/actions/profile.svg",
+                               "https://dev.nextcloud.com/index.php/u/christine"));
+        actions.add(new Action("core",
+                               "christine.scott@nextcloud.com",
+                               "https://dev.nextcloud.com/core/img/actions/mail.svg",
+                               "mailto:christine.scott@nextcloud.com"));
+
+        actions.add(new Action("spreed",
+                               "Talk to Christine",
+                               "https://dev.nextcloud.com/apps/spreed/img/app-dark.svg",
+                               "https://dev.nextcloud.com/apps/spreed/?callUser=christine"
+        ));
+
+        HoverCard hoverCard = new HoverCard("christine", "Christine Scott", actions);
+
+        // show dialog
+        Intent intent = new Intent(targetContext, FileDisplayActivity.class);
+        FileDisplayActivity fda = activityRule.launchActivity(intent);
+
+        ProfileBottomSheetDialog sut = new ProfileBottomSheetDialog(fda,
+                                                                    user,
+                                                                    hoverCard);
 
         fda.runOnUiThread(sut::show);
 

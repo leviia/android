@@ -5,11 +5,13 @@
  *   @author David A. Velasco
  *   @author Andy Scherzinger
  *   @author Chris Narkiewicz
+ *   @author TSI-mc
  *
  *   Copyright (C) 2011 Bartek Przybylski
  *   Copyright (C) 2016 ownCloud Inc.
  *   Copyright (C) 2018 Andy Scherzinger
  *   Copyright (C) 2019 Chris Narkiewicz <hello@ezaquarii.com>
+ *   Copyright (C) 2021 TSI-mc
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License version 2,
@@ -37,10 +39,12 @@ import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.nextcloud.client.account.User;
 import com.nextcloud.client.account.UserAccountManager;
 import com.nextcloud.client.di.Injectable;
+import com.nextcloud.client.network.ClientFactory;
 import com.nextcloud.client.network.ConnectivityService;
 import com.nextcloud.client.preferences.AppPreferences;
 import com.owncloud.android.MainApp;
@@ -52,18 +56,28 @@ import com.owncloud.android.datamodel.ThumbnailsCacheManager;
 import com.owncloud.android.files.FileMenuFilter;
 import com.owncloud.android.files.services.FileDownloader.FileDownloaderBinder;
 import com.owncloud.android.files.services.FileUploader.FileUploaderBinder;
+import com.owncloud.android.lib.common.OwnCloudClient;
 import com.owncloud.android.lib.common.network.OnDatatransferProgressListener;
+import com.owncloud.android.lib.common.operations.RemoteOperationResult;
 import com.owncloud.android.lib.common.utils.Log_OC;
+import com.owncloud.android.lib.resources.files.ToggleFavoriteRemoteOperation;
+import com.owncloud.android.lib.resources.shares.OCShare;
+import com.owncloud.android.lib.resources.shares.ShareType;
 import com.owncloud.android.ui.activity.FileDisplayActivity;
 import com.owncloud.android.ui.activity.ToolbarActivity;
 import com.owncloud.android.ui.adapter.FileDetailTabAdapter;
 import com.owncloud.android.ui.dialog.RemoveFilesDialogFragment;
 import com.owncloud.android.ui.dialog.RenameFileDialogFragment;
+import com.owncloud.android.ui.events.FavoriteEvent;
 import com.owncloud.android.utils.DisplayUtils;
 import com.owncloud.android.utils.MimeTypeUtil;
 import com.owncloud.android.utils.theme.ThemeBarUtils;
 import com.owncloud.android.utils.theme.ThemeColorUtils;
 import com.owncloud.android.utils.theme.ThemeLayoutUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.ref.WeakReference;
 
@@ -96,15 +110,17 @@ public class FileDetailFragment extends FileFragment implements OnClickListener,
     @Inject AppPreferences preferences;
     @Inject ConnectivityService connectivityService;
     @Inject UserAccountManager accountManager;
+    @Inject ClientFactory clientFactory;
+    @Inject FileDataStorageManager storageManager;
 
     /**
      * Public factory method to create new FileDetailFragment instances.
-     *
+     * <p>
      * When 'fileToDetail' or 'ocAccount' are null, creates a dummy layout (to use when a file wasn't tapped before).
      *
-     * @param fileToDetail      An {@link OCFile} to show in the fragment
-     * @param user              Currently active user
-     * @return                  New fragment with arguments set
+     * @param fileToDetail An {@link OCFile} to show in the fragment
+     * @param user         Currently active user
+     * @return New fragment with arguments set
      */
     public static FileDetailFragment newInstance(OCFile fileToDetail, User user) {
         FileDetailFragment frag = new FileDetailFragment();
@@ -281,6 +297,7 @@ public class FileDetailFragment extends FileFragment implements OnClickListener,
     public void onStart() {
         super.onStart();
         listenForTransferProgress();
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -310,6 +327,7 @@ public class FileDetailFragment extends FileFragment implements OnClickListener,
             toolbarActivity.hidePreviewImage();
         }
 
+        EventBus.getDefault().unregister(this);
         super.onStop();
     }
 
@@ -560,7 +578,7 @@ public class FileDetailFragment extends FileFragment implements OnClickListener,
                                                                               toolbarActivity.getPreviewImageContainer(),
                                                                               containerActivity.getStorageManager(),
                                                                               connectivityService,
-                                                                              containerActivity.getStorageManager().getAccount(),
+                                                                              containerActivity.getStorageManager().getUser(),
                                                                               getResources().getColor(R.color.background_color_inverse)
                         );
 
@@ -663,6 +681,77 @@ public class FileDetailFragment extends FileFragment implements OnClickListener,
 
         binding.emptyList.emptyListIcon.setImageResource(R.drawable.ic_list_empty_error);
         binding.emptyList.emptyListIcon.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * open the sharing process fragment for creating new share
+     * @param shareeName
+     * @param shareType
+     */
+    public void initiateSharingProcess(String shareeName, ShareType shareType) {
+        requireActivity().getSupportFragmentManager().beginTransaction().add(R.id.sharing_frame_container,
+                                                                             FileDetailsSharingProcessFragment.newInstance(getFile(),
+                                                                                                                           shareeName,
+                                                                                                                           shareType),
+                                                                             FileDetailsSharingProcessFragment.TAG)
+            .commit();
+
+        showHideFragmentView(true);
+    }
+
+    /**
+     * method will handle the views need to be hidden when sharing process fragment shows
+     * @param isFragmentReplaced
+     */
+    public void showHideFragmentView(boolean isFragmentReplaced) {
+        binding.tabLayout.setVisibility(isFragmentReplaced ? View.GONE : View.VISIBLE);
+        binding.pager.setVisibility(isFragmentReplaced ? View.GONE : View.VISIBLE);
+        binding.sharingFrameContainer.setVisibility(isFragmentReplaced ? View.VISIBLE : View.GONE);
+        FloatingActionButton mFabMain = requireActivity().findViewById(R.id.fab_main);
+        if (isFragmentReplaced) {
+            mFabMain.hide();
+        } else {
+            mFabMain.show();
+        }
+    }
+
+    /**
+     * open the new sharing screen process to modify the created share
+     * @param share
+     * @param screenTypePermission
+     * @param isReshareShown
+     * @param isExpiryDateShown
+     */
+    public void editExistingShare(OCShare share, int screenTypePermission, boolean isReshareShown,
+                                  boolean isExpiryDateShown) {
+        requireActivity().getSupportFragmentManager().beginTransaction().add(R.id.sharing_frame_container,
+                                                                             FileDetailsSharingProcessFragment.newInstance(share, screenTypePermission, isReshareShown,
+                                                                                                                           isExpiryDateShown),
+                                                                             FileDetailsSharingProcessFragment.TAG)
+            .commit();
+        showHideFragmentView(true);
+    }
+
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    public void onMessageEvent(FavoriteEvent event) {
+        try {
+            User user = accountManager.getUser();
+            OwnCloudClient client = clientFactory.create(user);
+
+            ToggleFavoriteRemoteOperation toggleFavoriteOperation = new ToggleFavoriteRemoteOperation(
+                event.shouldFavorite, event.remotePath);
+            RemoteOperationResult remoteOperationResult = toggleFavoriteOperation.execute(client);
+
+            if (remoteOperationResult.isSuccess()) {
+                getFile().setFavorite(event.shouldFavorite);
+                OCFile file = storageManager.getFileByEncryptedRemotePath(event.remotePath);
+                file.setFavorite(event.shouldFavorite);
+                storageManager.saveFile(file);
+            }
+
+        } catch (ClientFactory.CreationException e) {
+            Log_OC.e(TAG, "Error processing event", e);
+        }
     }
 
     /**

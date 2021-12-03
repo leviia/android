@@ -254,7 +254,7 @@ public final class ThumbnailsCacheManager {
     public static class ResizedImageGenerationTask extends AsyncTask<Object, Void, Bitmap> {
         private FileFragment fileFragment;
         private FileDataStorageManager storageManager;
-        private Account account;
+        private User user;
         private WeakReference<ImageView> imageViewReference;
         private WeakReference<FrameLayout> frameLayoutReference;
         private OCFile file;
@@ -267,15 +267,14 @@ public final class ThumbnailsCacheManager {
                                           FrameLayout emptyListProgress,
                                           FileDataStorageManager storageManager,
                                           ConnectivityService connectivityService,
-                                          Account account,
-                                          int backgroundColor)
-                throws IllegalArgumentException {
+                                          User user,
+                                          int backgroundColor) throws IllegalArgumentException {
             this.fileFragment = fileFragment;
             imageViewReference = new WeakReference<>(imageView);
             frameLayoutReference = new WeakReference<>(emptyListProgress);
             this.storageManager = storageManager;
             this.connectivityService = connectivityService;
-            this.account = account;
+            this.user = user;
             this.backgroundColor = backgroundColor;
         }
 
@@ -286,11 +285,8 @@ public final class ThumbnailsCacheManager {
             file = (OCFile) params[0];
 
             try {
-                if (account != null) {
-                    OwnCloudAccount ocAccount = new OwnCloudAccount(account, MainApp.getAppContext());
-                    mClient = OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,
-                                                                                              MainApp.getAppContext());
-                }
+                mClient = OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(user.toOwnCloudAccount(),
+                                                                                          MainApp.getAppContext());
 
                 thumbnail = doResizedImageInBackground();
 
@@ -869,6 +865,7 @@ public final class ThumbnailsCacheManager {
         private final float mAvatarRadius;
         private User user;
         private String mUserId;
+        private String displayName;
         private String mServerName;
         private Context mContext;
 
@@ -879,6 +876,7 @@ public final class ThumbnailsCacheManager {
                                     Resources resources,
                                     float avatarRadius,
                                     String userId,
+                                    String displayName,
                                     String serverName,
                                     Context context) {
             mAvatarGenerationListener = new WeakReference<>(avatarGenerationListener);
@@ -887,6 +885,7 @@ public final class ThumbnailsCacheManager {
             mResources = resources;
             mAvatarRadius = avatarRadius;
             mUserId = userId;
+            this.displayName = displayName;
             mServerName = serverName;
             mContext = context;
         }
@@ -1023,7 +1022,7 @@ public final class ThumbnailsCacheManager {
 
             if (avatar == null) {
                 try {
-                    return TextDrawable.createAvatar(user, mAvatarRadius);
+                    return TextDrawable.createAvatarByUserId(displayName, mAvatarRadius);
                 } catch (Exception e1) {
                     return ResourcesCompat.getDrawable(mResources, R.drawable.ic_user, null);
                 }
@@ -1203,7 +1202,7 @@ public final class ThumbnailsCacheManager {
         }
     }
 
-    public static void generateThumbnailFromOCFile(OCFile file, Account account, Context context) {
+    public static void generateThumbnailFromOCFile(OCFile file, User user, Context context) {
         int pxW;
         int pxH;
         pxW = pxH = getThumbnailDimension();
@@ -1216,7 +1215,7 @@ public final class ThumbnailsCacheManager {
 
             OwnCloudClient client = mClient;
             if (client == null) {
-                OwnCloudAccount ocAccount = new OwnCloudAccount(account, context);
+                OwnCloudAccount ocAccount = user.toOwnCloudAccount();
                 client = OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount, context);
             }
 

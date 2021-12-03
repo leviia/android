@@ -33,7 +33,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -62,7 +61,6 @@ import com.owncloud.android.BuildConfig;
 import com.owncloud.android.MainApp;
 import com.owncloud.android.R;
 import com.owncloud.android.authentication.AuthenticatorActivity;
-import com.owncloud.android.authentication.PassCodeManager;
 import com.owncloud.android.datamodel.ArbitraryDataProvider;
 import com.owncloud.android.datamodel.ExternalLinksProvider;
 import com.owncloud.android.datastorage.DataStorageProvider;
@@ -89,7 +87,6 @@ import javax.inject.Inject;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
@@ -120,6 +117,7 @@ public class SettingsActivity extends ThemedPreferenceActivity
     private static final int ACTION_CONFIRM_PASSCODE = 6;
     private static final int ACTION_CONFIRM_DEVICE_CREDENTIALS = 7;
     private static final int ACTION_REQUEST_CODE_DAVDROID_SETUP = 10;
+    private static final int ACTION_SHOW_MNEMONIC = 11;
     private static final int TRUE_VALUE = 1;
 
     private static final String DAV_PATH = "/remote.php/dav";
@@ -325,7 +323,7 @@ public class SettingsActivity extends ThemedPreferenceActivity
 
         setupCalendarPreference(preferenceCategoryMore);
 
-        setupContactsBackupPreference(preferenceCategoryMore);
+        setupBackupPreference();
 
         setupE2EMnemonicPreference(preferenceCategoryMore);
 
@@ -418,13 +416,13 @@ public class SettingsActivity extends ThemedPreferenceActivity
 
         Preference pMnemonic = findPreference("mnemonic");
         if (pMnemonic != null) {
-            if (!mnemonic.isEmpty() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!mnemonic.isEmpty()) {
                 if (DeviceCredentialUtils.areCredentialsAvailable(this)) {
                     pMnemonic.setOnPreferenceClickListener(preference -> {
 
                         Intent i = new Intent(MainApp.getAppContext(), RequestCredentialsActivity.class);
                         i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                        startActivityForResult(i, PassCodeManager.PASSCODE_ACTIVITY);
+                        startActivityForResult(i, ACTION_SHOW_MNEMONIC);
 
                         return true;
                     });
@@ -471,19 +469,13 @@ public class SettingsActivity extends ThemedPreferenceActivity
         }
     }
 
-    private void setupContactsBackupPreference(PreferenceCategory preferenceCategoryMore) {
-        boolean contactsBackupEnabled = !getResources().getBoolean(R.bool.show_drawer_contacts_backup)
-                && getResources().getBoolean(R.bool.contacts_backup);
-        Preference pContactsBackup = findPreference("contacts");
+    private void setupBackupPreference() {
+        Preference pContactsBackup = findPreference("backup");
         if (pContactsBackup != null) {
-            if (contactsBackupEnabled) {
-                pContactsBackup.setOnPreferenceClickListener(preference -> {
-                    ContactsPreferenceActivity.startActivityWithoutSidebar(this);
-                    return true;
-                });
-            } else {
-                preferenceCategoryMore.removePreference(pContactsBackup);
-            }
+            pContactsBackup.setOnPreferenceClickListener(preference -> {
+                ContactsPreferenceActivity.startActivityWithoutSidebar(this);
+                return true;
+            });
         }
     }
 
@@ -574,8 +566,8 @@ public class SettingsActivity extends ThemedPreferenceActivity
             if (!passCodeEnabled) {
                 lockEntries.remove(1);
                 lockValues.remove(1);
-            } else if (!deviceCredentialsEnabled || Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||
-                    !DeviceCredentialUtils.areCredentialsAvailable(getApplicationContext())) {
+            } else if (!deviceCredentialsEnabled ||
+                !DeviceCredentialUtils.areCredentialsAvailable(getApplicationContext())) {
                 lockEntries.remove(2);
                 lockValues.remove(2);
             }
@@ -631,8 +623,7 @@ public class SettingsActivity extends ThemedPreferenceActivity
 
             Preference pSyncedFolder = findPreference("synced_folders_configure_folders");
             if (pSyncedFolder != null) {
-                if (getResources().getBoolean(R.bool.syncedFolder_light)
-                        && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (getResources().getBoolean(R.bool.syncedFolder_light)) {
                     pSyncedFolder.setOnPreferenceClickListener(preference -> {
                         Intent intent = new Intent(this, SyncedFoldersActivity.class);
                         startActivity(intent);
@@ -652,8 +643,7 @@ public class SettingsActivity extends ThemedPreferenceActivity
             i.setAction(PassCodeActivity.ACTION_REQUEST_WITH_RESULT);
             startActivityForResult(i, ACTION_REQUEST_PASSCODE);
         } else if (LOCK_DEVICE_CREDENTIALS.equals(lock)){
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
-                    !DeviceCredentialUtils.areCredentialsAvailable(getApplicationContext())) {
+            if (!DeviceCredentialUtils.areCredentialsAvailable(getApplicationContext())) {
                 DisplayUtils.showSnackMessage(this, R.string.prefs_lock_device_credentials_not_setup);
             } else {
                 DisplayUtils.showSnackMessage(this, R.string.prefs_lock_device_credentials_enabled);
@@ -702,8 +692,7 @@ public class SettingsActivity extends ThemedPreferenceActivity
                 if (storagePath.equals(newPath)) {
                     return true;
                 }
-
-                StorageMigration storageMigration = new StorageMigration(this, storagePath, newPath);
+                StorageMigration storageMigration = new StorageMigration(this, user, storagePath, newPath);
                 storageMigration.setStorageMigrationProgressListener(this);
                 storageMigration.migrate();
 
@@ -855,21 +844,19 @@ public class SettingsActivity extends ThemedPreferenceActivity
         } else if (requestCode == ACTION_REQUEST_CODE_DAVDROID_SETUP && resultCode == RESULT_OK) {
             DisplayUtils.showSnackMessage(this, R.string.prefs_calendar_contacts_sync_setup_successful);
         } else if (requestCode == ACTION_CONFIRM_DEVICE_CREDENTIALS && resultCode == RESULT_OK &&
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
-                data.getIntExtra(RequestCredentialsActivity.KEY_CHECK_RESULT,
-                        RequestCredentialsActivity.KEY_CHECK_RESULT_FALSE) ==
-                        RequestCredentialsActivity.KEY_CHECK_RESULT_TRUE) {
+            data.getIntExtra(RequestCredentialsActivity.KEY_CHECK_RESULT,
+                             RequestCredentialsActivity.KEY_CHECK_RESULT_FALSE) ==
+                RequestCredentialsActivity.KEY_CHECK_RESULT_TRUE) {
             changeLockSetting(LOCK_NONE);
             DisplayUtils.showSnackMessage(this, R.string.credentials_disabled);
             if (!LOCK_NONE.equals(pendingLock)) {
                 enableLock(pendingLock);
             }
-        } else if (requestCode == PassCodeManager.PASSCODE_ACTIVITY && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        } else if (requestCode == ACTION_SHOW_MNEMONIC && resultCode == RESULT_OK) {
             handleMnemonicRequest(data);
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @VisibleForTesting
     public void handleMnemonicRequest(Intent data) {
         if (data == null) {

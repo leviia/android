@@ -209,10 +209,15 @@ public class OCFileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         return position;
     }
 
-    public void setFavoriteAttributeForItemID(String fileId, boolean favorite) {
+    public void setFavoriteAttributeForItemID(String fileId, boolean favorite, boolean removeFromList) {
         for (OCFile file : mFiles) {
             if (file.getRemoteId().equals(fileId)) {
                 file.setFavorite(favorite);
+
+                if (removeFromList) {
+                    mFiles.remove(file);
+                }
+                
                 break;
             }
         }
@@ -220,9 +225,15 @@ public class OCFileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         for (OCFile file : mFilesAll) {
             if (file.getRemoteId().equals(fileId)) {
                 file.setFavorite(favorite);
+                
+                if (removeFromList) {
+                    mFiles.remove(file);
+                }
+                
                 break;
             }
         }
+        
 
         FileSortOrder sortOrder = preferences.getSortOrderByFolder(currentDirectory);
         mFiles = sortOrder.sortCloudFiles(mFiles);
@@ -857,7 +868,7 @@ public class OCFileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
 
         if (mStorageManager == null) {
-            mStorageManager = new FileDataStorageManager(user.toPlatformAccount(), activity.getContentResolver());
+            mStorageManager = new FileDataStorageManager(user, activity.getContentResolver());
         }
 
         if (clear) {

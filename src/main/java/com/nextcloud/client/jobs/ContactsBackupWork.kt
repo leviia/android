@@ -179,7 +179,7 @@ class ContactsBackupWork(
     private fun expireFiles(daysToExpire: Int, backupFolderString: String, user: User) { // -1 disables expiration
         if (daysToExpire > -1) {
             val storageManager = FileDataStorageManager(
-                user.toPlatformAccount(),
+                user,
                 applicationContext.getContentResolver()
             )
             val backupFolder: OCFile = storageManager.getFileByPath(backupFolderString)
@@ -210,7 +210,7 @@ class ContactsBackupWork(
 
     @Suppress("NestedBlockDepth")
     private fun getContactFromCursor(cursor: Cursor): String {
-        val lookupKey = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY))
+        val lookupKey = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts.LOOKUP_KEY))
         val uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_VCARD_URI, lookupKey)
         var vCard = ""
         var inputStream: InputStream? = null

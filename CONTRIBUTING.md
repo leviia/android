@@ -16,6 +16,7 @@
         1. [Branching model](#branching-model)
         1. [Android Studio formatter setup](#android-studio-formatter-setup)
         1. [Build variants](#build-variants)
+        1. [Git hooks](#git-hooks)
     1. [Contribution process](#contribution-process)
         1. [Fork and download android repository](#fork-and-download-android-repository)
         1. [Create pull request](#create-pull-request)
@@ -137,11 +138,10 @@ To install them, just run:
 
 
 ### Create pull request:
-* Commit your changes locally: ```git commit -a```
+* Commit your changes locally. Remember to sign off your commits (`git commit -sm 'Your commit message'`).
 * Push your changes to your GitHub repo: ```git push```
 * Browse to <https://github.com/YOURGITHUBNAME/android/pulls> and issue pull request
 * Enter description and send pull request.
-
 
 ### Create another pull request:
 To make sure your new pull request does not contain commits which are already contained in previous PRs, create a new branch which is a clone of upstream/master.
@@ -327,7 +327,7 @@ We manage translations via [Transifex](https://www.transifex.com/nextcloud/nextc
 
 If you need to change a translation, do not change it, but give it new key. This way the translation stays backward compatible as we automatically backport translated strings to last versions.
 
-When submitting PRs with changed translations, please only submit changes to values/strings.xml and not changes to translated files. These will be overwritten by next merge of transifex-but and increase PR review.  
+When submitting PRs with changed translations, please only submit changes to values/strings.xml and not changes to translated files. These will be overwritten by next merge of transifex-bot and increase PR review.  
 
 ## Engineering practices
 
