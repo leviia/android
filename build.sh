@@ -36,5 +36,5 @@ parse_env build.gradle
 ./gradlew assembleGenericRelease
 mv build/outputs/apk/generic/release/generic-release-*.apk .
 
-#./gradlew assembleGenericDebug
-#mv build/outputs/apk/generic/debug/generic-debug-*.apk .
+./gradlew assembleGenericDebug
+mv build/outputs/apk/generic/debug/generic-debug-*.apk .
