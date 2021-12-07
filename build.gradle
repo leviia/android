@@ -156,12 +156,12 @@ android {
         productFlavors {
             // used for f-droid
             generic {
-                applicationId 'com.leviia.client'
+                applicationId '${leviia_app_idb}'
                 dimension "default"
             }
 
             gplay {
-                applicationId 'com.leviia.client'
+                applicationId '${leviia_app_idb}'
                 dimension "default"
             }
 
