@@ -48,7 +48,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.snackbar.Snackbar;
@@ -231,7 +230,7 @@ public class FileDisplayActivity extends FileActivity
     public static Intent openFileIntent(Context context, User user, OCFile file) {
         final Intent intent = new Intent(context, PreviewImageActivity.class);
         intent.putExtra(FileActivity.EXTRA_FILE, file);
-        intent.putExtra(FileActivity.EXTRA_ACCOUNT, user.toPlatformAccount());
+        intent.putExtra(FileActivity.EXTRA_USER, user);
         return intent;
     }
 
@@ -1124,6 +1123,8 @@ public class FileDisplayActivity extends FileActivity
             createMinFragments(null);
         } else {
             // pop back
+            ((CoordinatorLayout.LayoutParams) binding.rootLayout.getLayoutParams())
+                .setBehavior(new AppBarLayout.ScrollingViewBehavior());
             hideSearchView(getCurrentDir());
             showSortListGroup(true);
             super.onBackPressed();
@@ -1167,7 +1168,11 @@ public class FileDisplayActivity extends FileActivity
             localBroadcastManager.registerReceiver(mSyncBroadcastReceiver, syncIntentFilter);
         }
 
+
         if (!(leftFragment instanceof OCFileListFragment)) {
+            if (leftFragment instanceof FileFragment) {
+                super.updateActionBarTitleAndHomeButton(((FileFragment) leftFragment).getFile());
+            }
             return;
         }
 
@@ -2134,7 +2139,7 @@ public class FileDisplayActivity extends FileActivity
     public void startImagePreview(OCFile file, boolean showPreview) {
         Intent showDetailsIntent = new Intent(this, PreviewImageActivity.class);
         showDetailsIntent.putExtra(EXTRA_FILE, file);
-        showDetailsIntent.putExtra(EXTRA_ACCOUNT, getAccount());
+        showDetailsIntent.putExtra(EXTRA_USER, getUser().orElseThrow(RuntimeException::new));
         if (showPreview) {
             startActivity(showDetailsIntent);
         } else {
@@ -2153,7 +2158,7 @@ public class FileDisplayActivity extends FileActivity
     public void startImagePreview(OCFile file, VirtualFolderType type, boolean showPreview) {
         Intent showDetailsIntent = new Intent(this, PreviewImageActivity.class);
         showDetailsIntent.putExtra(PreviewImageActivity.EXTRA_FILE, file);
-        showDetailsIntent.putExtra(EXTRA_ACCOUNT, getAccount());
+        showDetailsIntent.putExtra(EXTRA_USER, getUser().orElseThrow(RuntimeException::new));
         showDetailsIntent.putExtra(PreviewImageActivity.EXTRA_VIRTUAL_TYPE, type);
 
         if (showPreview) {
@@ -2187,6 +2192,7 @@ public class FileDisplayActivity extends FileActivity
             Fragment mediaFragment = PreviewMediaFragment.newInstance(file, user.get(), startPlaybackPosition, autoplay);
             setLeftFragment(mediaFragment);
             binding.rightFragmentContainer.setVisibility(View.GONE);
+            ((CoordinatorLayout.LayoutParams) binding.rootLayout.getLayoutParams()).setBehavior(null);
             super.updateActionBarTitleAndHomeButton(file);
         } else {
             Intent previewIntent = new Intent();

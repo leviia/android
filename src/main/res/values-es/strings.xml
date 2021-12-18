@@ -622,7 +622,6 @@
     <string name="share_internal_link_to_folder_text">Los links compartidos internos solo funcionan para los usuarios con acceso a esta carpeta</string>
     <string name="share_known_remote_on_clarification">en %1$s</string>
     <string name="share_link">Compartir enlace</string>
-    <string name="share_link_empty_note_message">Introduce una nota, por favor.</string>
     <string name="share_link_empty_password">Debes introducir una contraseña</string>
     <string name="share_link_file_error">Se produjo un error al intentar compartir este archivo o carpeta.</string>
     <string name="share_link_file_no_exist">Imposible compartir. Por favor, comprueba que el archivo exista.</string>
@@ -632,7 +631,6 @@
     <string name="share_link_with_label">Link para compartir (%1$s)</string>
     <string name="share_no_expiration_date_label">Fijar fecha de caducidad</string>
     <string name="share_no_password_title">Establecer contraseña</string>
-    <string name="share_open_in">Abrir con...</string>
     <string name="share_password_title">Protegido con contraseña</string>
     <string name="share_permission_can_edit">Puede editar</string>
     <string name="share_permission_file_drop">Entrega de archivos</string>

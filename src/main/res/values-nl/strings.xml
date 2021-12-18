@@ -624,7 +624,6 @@
     <string name="share_internal_link_to_folder_text">Interne link voor delen werkt alleen voor gebruikers met toegang tot deze map</string>
     <string name="share_known_remote_on_clarification">op %1$s</string>
     <string name="share_link">Link delen</string>
-    <string name="share_link_empty_note_message">Geef een notitie.</string>
     <string name="share_link_empty_password">Je moet een wachtwoord opgeven</string>
     <string name="share_link_file_error">Er trad een fout op bij je poging dit bestand of deze map te delen.</string>
     <string name="share_link_file_no_exist">Kan dit niet delen. Controleer of dit bestand wel bestaat.</string>
@@ -634,7 +633,6 @@
     <string name="share_link_with_label">Link delen (%1$s)</string>
     <string name="share_no_expiration_date_label">Stel vervaldatum in</string>
     <string name="share_no_password_title">Instellen wachtwoord</string>
-    <string name="share_open_in">Openen in…</string>
     <string name="share_password_title">Wachtwoord beveiligd</string>
     <string name="share_permission_can_edit">Kan bewerken</string>
     <string name="share_permission_file_drop">Bestandsopslag</string>

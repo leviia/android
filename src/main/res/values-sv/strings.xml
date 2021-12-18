@@ -374,6 +374,7 @@
     <string name="forward">Vidarebefordra</string>
     <string name="fourHours">4 timmar</string>
     <string name="fullscreen">Fullskärm</string>
+    <string name="hidden_file_name_warning">Namngivning kommer att resultera i en dold fil</string>
     <string name="hint_name">Namn</string>
     <string name="hint_note">Anteckning</string>
     <string name="hint_password">Lösenord</string>
@@ -624,7 +625,6 @@
     <string name="share_internal_link_to_folder_text">Intern länkdelning fungerar bara för användare med åtkomst till den här mappen</string>
     <string name="share_known_remote_on_clarification">på %1$s</string>
     <string name="share_link">Dela länk</string>
-    <string name="share_link_empty_note_message">Ange anteckning.</string>
     <string name="share_link_empty_password">Du måste ange ett lösenord</string>
     <string name="share_link_file_error">Ett fel uppstod vid försök att dela denna fil eller mapp.</string>
     <string name="share_link_file_no_exist">Det går inte att dela. Vänligen kontrollera om filen finns.</string>
@@ -634,7 +634,6 @@
     <string name="share_link_with_label">Dela länk (%1$s)</string>
     <string name="share_no_expiration_date_label">Välj utgångsdatum</string>
     <string name="share_no_password_title">Sätt lösenord</string>
-    <string name="share_open_in">Öppna i...</string>
     <string name="share_password_title">Lösenordsskyddad</string>
     <string name="share_permission_can_edit">Kan ändra</string>
     <string name="share_permission_file_drop">Släpp fil</string>

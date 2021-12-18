@@ -613,7 +613,6 @@
     <string name="share_internal_link_to_folder_text">Notranja povezava mesta souporabe deluje le za uporabnike z dostopom do mape.</string>
     <string name="share_known_remote_on_clarification">na %1$s</string>
     <string name="share_link">Povezava za souporabo</string>
-    <string name="share_link_empty_note_message">Vpišite sporočilo.</string>
     <string name="share_link_empty_password">Vpisati je treba geslo.</string>
     <string name="share_link_file_error">Prišlo je do napake med poskusom omogočanja souporabe te datoteke ali mape</string>
     <string name="share_link_file_no_exist">Souporaba ni mogoča. Preverite, ali datoteka obstaja.</string>
@@ -623,7 +622,6 @@
     <string name="share_link_with_label">Povezava souporabe (%1$s)</string>
     <string name="share_no_expiration_date_label">Nastavi datum preteka</string>
     <string name="share_no_password_title">Nastavi geslo</string>
-    <string name="share_open_in">Odpri v ...</string>
     <string name="share_password_title">Zaščiteno z geslom</string>
     <string name="share_permission_can_edit">Lahko ureja</string>
     <string name="share_permission_view_only">Le ogled</string>
@@ -635,7 +633,7 @@
     <string name="share_send_note">Sporočilo za prejemnika</string>
     <string name="share_settings">Nastavitve</string>
     <string name="share_via_link_hide_download">Skrij prejem</string>
-    <string name="share_via_link_section_title">Omogoči souporabo prek povezave</string>
+    <string name="share_via_link_section_title">Omogoči souporabo s povezavo</string>
     <string name="share_via_link_send_link_label">Pošlji povezavo</string>
     <string name="share_via_link_unset_password">Odstrani izbor</string>
     <string name="share_with_title">Omogoči souporabo …</string>
@@ -749,7 +747,7 @@
     <string name="unshare_link_file_no_exist">Ni mogoče prekiniti souporabe. Preverite, ali datoteka obstaja.</string>
     <string name="unshare_link_forbidden_permissions">za preklic souporabe datoteke.</string>
     <string name="unsharing_failed">Odstranjevanje souporabe je spodletelo</string>
-    <string name="untrusted_domain">Zaznan je dostop prek domene, ki ni zaupanja vredna. Več podrobnosti je zapisanih v dokumentaciji.</string>
+    <string name="untrusted_domain">Zaznan je dostop z domene, ki ni zaupanja vredna. Več podrobnosti je zapisanih v dokumentaciji.</string>
     <string name="update_link_file_error">Prišlo je do napake med posodabljanjem mesta souporabe</string>
     <string name="update_link_file_no_exist">Posodobitev ni mogoča. Preverite, ali datoteka obstaja.</string>
     <string name="update_link_forbidden_permissions">za posodobitev mesta souporabe</string>

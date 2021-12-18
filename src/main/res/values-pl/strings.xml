@@ -108,7 +108,7 @@
     <string name="common_error">Błąd</string>
     <string name="common_error_out_memory">Brak wystarczającej pamięci</string>
     <string name="common_error_unknown">Nieznany błąd</string>
-    <string name="common_loading">Ładowanie…</string>
+    <string name="common_loading">Wczytywanie…</string>
     <string name="common_next">Następne</string>
     <string name="common_no">Nie</string>
     <string name="common_ok">OK</string>
@@ -150,8 +150,10 @@
     <string name="conflict_already_existing_file">Już istniejący plik</string>
     <string name="conflict_dialog_error">Błąd podczas tworzenia dialogu konfliktu!</string>
     <string name="conflict_file_headline">Plik powodujący konflikt %1$s</string>
+    <string name="conflict_local_file">Plik lokalny</string>
     <string name="conflict_message_description">Jeśli wybierzesz obie wersje, to do nazwy pliku lokalnego zostanie dodany numer.</string>
     <string name="conflict_new_file">Nowy plik</string>
+    <string name="conflict_server_file">Plik z serwera</string>
     <string name="contactlist_item_icon">Ikona użytkownika w liście kontaktów</string>
     <string name="contactlist_no_permission">Brak nadanych uprawnień, nic nie zaimportowano.</string>
     <string name="contacts">Kontakty</string>
@@ -228,7 +230,7 @@
     <string name="drawer_item_shared">Udostępnione</string>
     <string name="drawer_item_trashbin">Usunięte pliki</string>
     <string name="drawer_item_uploads_list">Wysłane</string>
-    <string name="drawer_item_videos">Wideo</string>
+    <string name="drawer_item_videos">Filmy</string>
     <string name="drawer_logout">Wyloguj</string>
     <string name="drawer_open">Otwórz pasek boczny</string>
     <string name="drawer_quota">Wykorzystane: %1$s z %2$s</string>
@@ -257,6 +259,7 @@
     <string name="error_choosing_date">Błąd podczas wybierania daty</string>
     <string name="error_comment_file">Błąd przy komentowaniu pliku</string>
     <string name="error_crash_title">%1$s zatrzymany</string>
+    <string name="error_creating_file_from_template">Błąd podczas tworzenia pliku z szablonu</string>
     <string name="error_report_issue_action">Raport</string>
     <string name="error_report_issue_text">Chcesz zgłosić problem? (wymaga konta Github)</string>
     <string name="error_retrieving_file">Błąd podczas pobierania pliku</string>
@@ -300,6 +303,7 @@
     <string name="file_list_empty">Wyślij lub zsynchronizuj pliki z urządzeniami.</string>
     <string name="file_list_empty_favorite_headline">Brak ulubionych</string>
     <string name="file_list_empty_favorites_filter_list">Tutaj pojawią się pliki i katalogi oznaczone jako ulubione.</string>
+    <string name="file_list_empty_gallery">Nie znaleziono obrazów ani filmów</string>
     <string name="file_list_empty_headline">Brak plików</string>
     <string name="file_list_empty_headline_search">Brak wyników w tym katalogu</string>
     <string name="file_list_empty_headline_server_search">Brak wyników</string>
@@ -310,8 +314,9 @@
     <string name="file_list_empty_search">Może jest w innym katalogu?</string>
     <string name="file_list_empty_shared">Tutaj pojawią się pliki i katalogi, które udostępnisz.</string>
     <string name="file_list_empty_shared_headline">Nic nie udostępniasz</string>
+    <string name="file_list_empty_unified_search_no_results">Nie znaleziono wyników dla Twojego zapytania</string>
     <string name="file_list_folder">katalog</string>
-    <string name="file_list_loading">Ładowanie…</string>
+    <string name="file_list_loading">Wczytywanie…</string>
     <string name="file_list_no_app_for_file_type">Brak aplikacji dla tego typu plików.</string>
     <string name="file_list_seconds_ago">przed chwilą</string>
     <string name="file_management_permission">Potrzebne uprawnienia</string>
@@ -396,7 +401,7 @@
     <string name="link_share_read_only">Tylko do odczytu</string>
     <string name="link_share_view_only">Tylko podgląd</string>
     <string name="list_layout">Wygląd listy</string>
-    <string name="load_more_results">Załaduj więcej wyników</string>
+    <string name="load_more_results">Wczytaj więcej wyników</string>
     <string name="local_file_list_empty">Nie ma plików w tym katalogu.</string>
     <string name="local_file_not_found_message">Plik nie został znaleziony w lokalnym systemie plików</string>
     <string name="local_folder_friendly_path">%1$s/%2$s</string>
@@ -410,7 +415,7 @@
     <string name="logs_menu_search">Przeszukaj dziennik</string>
     <string name="logs_menu_send">Wyślij dziennik e-mailem</string>
     <string name="logs_status_filtered">Dziennik: %1$d kB, zapytanie dopasowane %2$d/%3$d w %4$d ms</string>
-    <string name="logs_status_loading">Ładowanie…</string>
+    <string name="logs_status_loading">Wczytywanie…</string>
     <string name="logs_status_not_filtered">Dziennik: %1$d kB, bez filtra</string>
     <string name="logs_title">Dziennik</string>
     <string name="maintenance_mode">Serwer jest w trybie konserwacji</string>
@@ -517,7 +522,7 @@
     <string name="prefs_calendar_contacts_address_resolve_error">Adres serwera skojarzony z tym kontem nie został rozpoznany przez DAVx5 (wcześniej znanego jako DAVdroid)</string>
     <string name="prefs_calendar_contacts_no_store_error">Brak w systemie F-Droid i Google Play</string>
     <string name="prefs_calendar_contacts_summary">Skonfiguruj DAVx5 (wcześniej znany jako DAVdroid) (v1.3.0 +) dla bieżącego konta</string>
-    <string name="prefs_calendar_contacts_sync_setup_successful">Synchronizacja kontaktów &amp; kalendarza została skonfigurowana pomyślnie</string>
+    <string name="prefs_calendar_contacts_sync_setup_successful">Synchronizacja kontaktów i kalendarza została skonfigurowana pomyślnie</string>
     <string name="prefs_category_about">O aplikacji</string>
     <string name="prefs_category_details">Szczegóły</string>
     <string name="prefs_category_dev">Deweloperskie</string>
@@ -596,7 +601,7 @@
     <string name="screenshot_04_accounts_heading">Wszystkie Twoje konta</string>
     <string name="screenshot_04_accounts_subline">w jednym miejscu</string>
     <string name="screenshot_05_autoUpload_heading">Automatyczne wysyłanie</string>
-    <string name="screenshot_05_autoUpload_subline">dla Twoich zdjęć &amp; wideo</string>
+    <string name="screenshot_05_autoUpload_subline">dla Twoich zdjęć i filmów</string>
     <string name="screenshot_06_davdroid_heading">Kontakty kalendarza &amp;</string>
     <string name="screenshot_06_davdroid_subline">Synchronizuj z DAVx5</string>
     <string name="search_error">Błąd podczas pobierania wyników wyszukiwania</string>
@@ -624,7 +629,6 @@
     <string name="share_internal_link_to_folder_text">Wewnętrzny link udostępnienia działa tylko dla użytkowników z dostępem do tego katalogu</string>
     <string name="share_known_remote_on_clarification">na %1$s</string>
     <string name="share_link">Udostępnij link</string>
-    <string name="share_link_empty_note_message">Proszę wpisać notatkę.</string>
     <string name="share_link_empty_password">Musisz wprowadzić hasło</string>
     <string name="share_link_file_error">Wystąpił błąd podczas próby udostępnienia tego pliku lub katalogu.</string>
     <string name="share_link_file_no_exist">Nie można udostępnić. Sprawdź, czy plik istnieje.</string>
@@ -634,7 +638,6 @@
     <string name="share_link_with_label">Udostępnij link (%1$s)</string>
     <string name="share_no_expiration_date_label">Ustaw datę wygaśnięcia</string>
     <string name="share_no_password_title">Ustaw hasło</string>
-    <string name="share_open_in">Otwórz w…</string>
     <string name="share_password_title">Zabezpieczone hasłem</string>
     <string name="share_permission_can_edit">Może edytować</string>
     <string name="share_permission_file_drop">Upuść plik</string>
@@ -701,7 +704,7 @@
     <string name="storage_movies">Filmy</string>
     <string name="storage_music">Muzyka</string>
     <string name="storage_pictures">Obrazy</string>
-    <string name="store_full_desc">Oprogramowanie biurowe uruchamiane na własnym hostingu, który zapewnia kontrolę.\n\nFunkcje:\n* Łatwy, nowoczesny interfejs, dostosowany do wyglądu Twojego serwera\n* Wysyłanie plików na serwer Nextcloud\n* Udostępnianie ich innym\n* Synchronizacja ulubionych plików i katalogów\n* Przeszukiwanie wszystkich katalogów na serwerze\n* Automatyczne przesyłanie zdjęć i filmów zrobionych przez urządzenie\n* Otrzymywanie na bieżąco powiadomień\n* Obsługa wielu kont\n* Bezpieczny dostęp do danych za pomocą odcisku palca lub kodu PIN\n* Integracja z DAVx5 (wcześniej znany jako DAVdroid) dla łatwej konfiguracji kalendarza &amp; Synchronizacja kontaktów\n\nZgłoś wszystkie problemy na https://github.com/nextcloud/android/issues i omów tę aplikację na https://help.nextcloud.com/c/clients/android\n\nNie znasz jeszcze Nextcloud? Nextcloud to prywatny serwer do synchronizacji plików &amp; i komunikacji. Jest darmowym oprogramowaniem, które możesz hostować samodzielnie lub zapłacić firmie, która zrobi to za Ciebie. Dzięki temu posiadasz pełną kontrolę nad swoimi zdjęciami, kalendarzem, kontaktami, dokumentami i nad wszystkim innym.\n\nSprawdź Nextcloud na https://nextcloud.com</string>
+    <string name="store_full_desc">Oprogramowanie biurowe uruchamiane na własnym hostingu, który zapewnia kontrolę.\n\nFunkcje:\n* Łatwy, nowoczesny interfejs, dostosowany do wyglądu Twojego serwera\n* Wysyłanie plików na serwer Nextcloud\n* Udostępnianie ich innym\n* Synchronizacja ulubionych plików i katalogów\n* Przeszukiwanie wszystkich katalogów na serwerze\n* Automatyczne przesyłanie zdjęć i filmów zrobionych przez urządzenie\n* Otrzymywanie na bieżąco powiadomień\n* Obsługa wielu kont\n* Bezpieczny dostęp do danych za pomocą odcisku palca lub kodu PIN\n* Integracja z DAVx5 (wcześniej znany jako DAVdroid) dla łatwej konfiguracji kalendarza i synchronizacja kontaktów\n\nZgłoś wszystkie problemy na https://github.com/nextcloud/android/issues i omów tę aplikację na https://help.nextcloud.com/c/clients/android\n\nNie znasz jeszcze Nextcloud? Nextcloud to prywatny serwer do synchronizacji plików i komunikacji. Jest darmowym oprogramowaniem, które możesz hostować samodzielnie lub zapłacić firmie, która zrobi to za Ciebie. Dzięki temu posiadasz pełną kontrolę nad swoimi zdjęciami, kalendarzem, kontaktami, dokumentami i nad wszystkim innym.\n\nSprawdź Nextcloud na https://nextcloud.com</string>
     <string name="store_full_dev_desc">Oprogramowanie biurowe uruchamiane na własnym hostingu, który zapewnia kontrolę.\nJest to oficjalna wersja deweloperska, zawierająca codzienną próbkę każdej nowej niesprawdzonej funkcji, która może powodować niestabilność i utratę danych. Aplikacja jest przeznaczona dla użytkowników chcących przetestować i zgłosić błędy w przypadku ich wystąpienia. Nie używaj jej do ciągłej pracy!\n\nZarówno oficjalna wersja dev jak i zwykła są dostępne na F-droid i mogą być instalowane równocześnie.</string>
     <string name="store_short_desc">Oprogramowanie biurowe uruchamiane na własnym hostingu, który zapewnia kontrolę</string>
     <string name="store_short_dev_desc">Oprogramowanie biurowe uruchamiane na własnym hostingu, które zapewnia kontrolę (wersja deweloperska)</string>
@@ -745,14 +748,14 @@
     <string name="thumbnail">Miniatura</string>
     <string name="thumbnail_for_existing_file_description">Miniaturka dla istniejącego pliku</string>
     <string name="thumbnail_for_new_file_desc">Miniaturka dla nowego pliku</string>
-    <string name="timeout_richDocuments">Ładowanie potrwa długo…</string>
+    <string name="timeout_richDocuments">Wczytywanie potrwa bardzo długo…</string>
     <string name="today">Dzisiaj</string>
     <string name="trashbin_activity_title">Usunięte pliki</string>
     <string name="trashbin_empty_headline">Brak usuniętych plików</string>
     <string name="trashbin_empty_message">Tutaj będziesz mógł odzyskać usunięte pliki.</string>
     <string name="trashbin_file_not_deleted">Plik %1$s nie może zostać usunięty!</string>
     <string name="trashbin_file_not_restored">Plik %1$s nie może zostać przywrócony!</string>
-    <string name="trashbin_loading_failed">Ładowanie kosza nie powiodło się!</string>
+    <string name="trashbin_loading_failed">Wczytywanie kosza nie powiodło się!</string>
     <string name="trashbin_not_emptied">Pliki nie mogą być trwale usunięte!</string>
     <string name="unread_comments">Nieprzeczytane komentarze</string>
     <string name="unset_encrypted">Wyłącz szyfrowanie</string>

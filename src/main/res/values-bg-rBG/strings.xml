@@ -625,7 +625,6 @@
     <string name="share_internal_link_to_folder_text">Вътрешната връзка за споделяне работи само за потребители, които имат достъп до тази папка</string>
     <string name="share_known_remote_on_clarification">на %1$s</string>
     <string name="share_link">Връзка за споделяне</string>
-    <string name="share_link_empty_note_message">Моля, въведете бележка.</string>
     <string name="share_link_empty_password">Трябва да въведете парола</string>
     <string name="share_link_file_error">Възникна грешка при опита за споделяне на този файл или папка.</string>
     <string name="share_link_file_no_exist">Невъзможно да се сподели. Моля, проверете дали файлът съществува.</string>
@@ -635,7 +634,6 @@
     <string name="share_link_with_label">Споделяне на линк (%1$s)</string>
     <string name="share_no_expiration_date_label">Срок на валидност</string>
     <string name="share_no_password_title">Задайте парола</string>
-    <string name="share_open_in">Отваряне в ...</string>
     <string name="share_password_title">Защитена с парола</string>
     <string name="share_permission_can_edit">Може да редактира</string>
     <string name="share_permission_file_drop">Изпускане/Преместване/ на файл</string>

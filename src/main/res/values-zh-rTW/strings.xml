@@ -257,6 +257,7 @@
     <string name="error_choosing_date">選擇日期錯誤</string>
     <string name="error_comment_file">留言錯誤</string>
     <string name="error_crash_title">%1$s失敗</string>
+    <string name="error_creating_file_from_template">從範本建立檔案時發生錯誤</string>
     <string name="error_report_issue_action">回報</string>
     <string name="error_report_issue_text">想回報問題？（需要 Github 帳號）</string>
     <string name="error_retrieving_file">擷取檔案時發生錯誤</string>
@@ -300,6 +301,7 @@
     <string name="file_list_empty">上傳一些內容或與您的裝置同步。</string>
     <string name="file_list_empty_favorite_headline">目前沒有我的最愛</string>
     <string name="file_list_empty_favorites_filter_list">將您最愛的檔案與資料夾標記後將會顯示在這</string>
+    <string name="file_list_empty_gallery">找不到圖片或影片</string>
     <string name="file_list_empty_headline">目前沒有檔案</string>
     <string name="file_list_empty_headline_search">在這資料夾中沒有結果</string>
     <string name="file_list_empty_headline_server_search">沒有符合搜尋的項目</string>
@@ -310,6 +312,7 @@
     <string name="file_list_empty_search">也許其在其他資料夾中？</string>
     <string name="file_list_empty_shared">您分享的檔案跟資料夾會顯示在這裡。</string>
     <string name="file_list_empty_shared_headline">還沒有分享任何資料</string>
+    <string name="file_list_empty_unified_search_no_results">找不到與您的搜尋相符的結果</string>
     <string name="file_list_folder">資料夾</string>
     <string name="file_list_loading">正在載入……</string>
     <string name="file_list_no_app_for_file_type">未設定處理此檔案類型適用的應用程式。</string>
@@ -624,7 +627,6 @@
     <string name="share_internal_link_to_folder_text">內部分享連結僅對有權存取這個資料夾的使用者有效</string>
     <string name="share_known_remote_on_clarification">在 %1$s</string>
     <string name="share_link">分享連結</string>
-    <string name="share_link_empty_note_message">請輸入註記。</string>
     <string name="share_link_empty_password">您必須輸入密碼</string>
     <string name="share_link_file_error">嘗試分享檔案或資料夾時發生錯誤</string>
     <string name="share_link_file_no_exist">無法分享檔案。請確認檔案是否存在。</string>
@@ -634,7 +636,6 @@
     <string name="share_link_with_label">分享連結 (%1$s)</string>
     <string name="share_no_expiration_date_label">設定到期日</string>
     <string name="share_no_password_title">設定密碼</string>
-    <string name="share_open_in">開啟於……</string>
     <string name="share_password_title">受密碼保護</string>
     <string name="share_permission_can_edit">可以編輯</string>
     <string name="share_permission_file_drop">檔案投遞</string>

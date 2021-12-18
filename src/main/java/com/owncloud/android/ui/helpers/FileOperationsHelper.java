@@ -260,7 +260,7 @@ public class FileOperationsHelper {
             // ISSUE 5: if the user is not running the app (this is a service!),
             // this can be very intrusive; a notification should be preferred
             Intent intent = ConflictsResolveActivity.createIntent(file,
-                                                                  user.toPlatformAccount(),
+                                                                  user,
                                                                   -1,
                                                                   Intent.FLAG_ACTIVITY_NEW_TASK,
                                                                   fileActivity);
@@ -332,7 +332,7 @@ public class FileOperationsHelper {
                         // ISSUE 5: if the user is not running the app (this is a service!),
                         // this can be very intrusive; a notification should be preferred
                         Intent intent = ConflictsResolveActivity.createIntent(file,
-                                                                              user.toPlatformAccount(),
+                                                                              user,
                                                                               -1,
                                                                               Intent.FLAG_ACTIVITY_NEW_TASK,
                                                                               fileActivity);
@@ -566,7 +566,7 @@ public class FileOperationsHelper {
             service.putExtra(OperationsService.EXTRA_SHARE_HIDE_FILE_DOWNLOAD, hideFileDownload);
             service.putExtra(OperationsService.EXTRA_SHARE_PASSWORD, (password == null) ? "" : password);
             service.putExtra(OperationsService.EXTRA_SHARE_EXPIRATION_DATE_IN_MILLIS, expirationTimeInMillis);
-            service.putExtra(OperationsService.EXTRA_SHARE_NOTE, note);
+            service.putExtra(OperationsService.EXTRA_SHARE_NOTE, (note == null) ? "" : note);
             service.putExtra(OperationsService.EXTRA_SHARE_PUBLIC_LABEL, (label == null) ? "" : label);
 
             mWaitingForOpId = fileActivity.getOperationsServiceBinder().queueNewOperation(service);
@@ -628,7 +628,7 @@ public class FileOperationsHelper {
     public void showShareFile(OCFile file) {
         Intent intent = new Intent(fileActivity, ShareActivity.class);
         intent.putExtra(FileActivity.EXTRA_FILE, file);
-        intent.putExtra(FileActivity.EXTRA_ACCOUNT, fileActivity.getAccount());
+        intent.putExtra(FileActivity.EXTRA_USER, fileActivity.getUser().orElseThrow(RuntimeException::new));
         fileActivity.startActivity(intent);
     }
 
@@ -843,6 +843,7 @@ public class FileOperationsHelper {
                 }
 
                 intent.setDataAndType(uri, file.getMimeType());
+                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 fileActivity.startActivityForResult(Intent.createChooser(intent,
                                                                          fileActivity.getString(R.string.set_as)),
                                                     200);

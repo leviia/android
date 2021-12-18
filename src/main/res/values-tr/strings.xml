@@ -150,8 +150,10 @@
     <string name="conflict_already_existing_file">Dosya zaten var</string>
     <string name="conflict_dialog_error">Çakışma penceresi oluşturulurken sorun çıktı!</string>
     <string name="conflict_file_headline">%1$s dosyası çakışıyor</string>
+    <string name="conflict_local_file">Yerel dosya</string>
     <string name="conflict_message_description">İki sürümü de saklamayı seçerseniz, yerel dosyanın adına bir numara eklenecek.</string>
     <string name="conflict_new_file">Yeni dosya</string>
+    <string name="conflict_server_file">Sunucu dosyası</string>
     <string name="contactlist_item_icon">Kişi listesi kullanıcı simgesi</string>
     <string name="contactlist_no_permission">Herhangi bir izin verilmemiş olduğundan hiçbir şey içe aktarılamadı.</string>
     <string name="contacts">Kişiler</string>
@@ -257,6 +259,7 @@
     <string name="error_choosing_date">Tarih seçilirken sorun çıktı</string>
     <string name="error_comment_file">Dosyaya yorum yapılırken sorun çıktı</string>
     <string name="error_crash_title">%1$s çöktü</string>
+    <string name="error_creating_file_from_template">Kalıptan dosya oluşturulurken sorun çıktı</string>
     <string name="error_report_issue_action">Hata bildirin</string>
     <string name="error_report_issue_text">İzleyici üzerine bir hata bildirmek ister misiniz? (GitHub hesabı gereklidir)</string>
     <string name="error_retrieving_file">Dosya alınırken sorun çıktı</string>
@@ -300,6 +303,7 @@
     <string name="file_list_empty">Bazı içerikler yükleyin ya da aygıtlarınızla eşitleyin.</string>
     <string name="file_list_empty_favorite_headline">Henüz sık kullanılan bir öge yok</string>
     <string name="file_list_empty_favorites_filter_list">Sık kullanılanlara eklediğiniz dosya ve klasörler burada görüntülenir.</string>
+    <string name="file_list_empty_gallery">Herhangi bir görsel ya da görüntü bulunamadı</string>
     <string name="file_list_empty_headline">Burada herhangi bir dosya yok</string>
     <string name="file_list_empty_headline_search">Bu klasörde herhangi bir sonuç yok</string>
     <string name="file_list_empty_headline_server_search">Herhangi bir sonuç bulunamadı</string>
@@ -310,6 +314,7 @@
     <string name="file_list_empty_search">Başka bir klasöre bakılmasını ister misiniz?</string>
     <string name="file_list_empty_shared">Paylaştığınız dosya ve klasörler burada görüntülenir.</string>
     <string name="file_list_empty_shared_headline">Henüz hiçbir şey paylaşılmamış</string>
+    <string name="file_list_empty_unified_search_no_results">Sorgunuzdan bir sonuç alınamadı</string>
     <string name="file_list_folder">klasör</string>
     <string name="file_list_loading">Yükleniyor …</string>
     <string name="file_list_no_app_for_file_type">Bu dosya türü için uygulama bulunamadı.</string>
@@ -624,7 +629,6 @@
     <string name="share_internal_link_to_folder_text">İç bağlantı paylaşımı yalnız bu klasöre erişebilen kullanıcılar için geçerlidir</string>
     <string name="share_known_remote_on_clarification">%1$s zamanında</string>
     <string name="share_link">Bağlantıyı paylaş</string>
-    <string name="share_link_empty_note_message">Lütfen bir not yazın.</string>
     <string name="share_link_empty_password">Bir parola yazmalısınız</string>
     <string name="share_link_file_error">Bu dosya ya da klasör paylaşılmaya çalışılırken bir sorun çıktı.</string>
     <string name="share_link_file_no_exist">Paylaşılamadı. Lütfen dosyanın var olup olmadığını denetleyin.</string>
@@ -634,7 +638,6 @@
     <string name="share_link_with_label">Bağlantı paylaş (%1$s)</string>
     <string name="share_no_expiration_date_label">Son kullanma tarihini ayarla</string>
     <string name="share_no_password_title">Parolayı ayarla</string>
-    <string name="share_open_in">Şurada aç…</string>
     <string name="share_password_title">Parola korumalı</string>
     <string name="share_permission_can_edit">Düzenleyebilir</string>
     <string name="share_permission_file_drop">Dosya bırakma</string>
@@ -773,7 +776,7 @@
     <string name="upload_file_dialog_filename">Dosya adı</string>
     <string name="upload_file_dialog_filetype">Dosya türü</string>
     <string name="upload_file_dialog_filetype_googlemap_shortcut">Google haritalar kısayol dosyası(%s)</string>
-    <string name="upload_file_dialog_filetype_internet_shortcut">İnternet kısayol dosya(%s)</string>
+    <string name="upload_file_dialog_filetype_internet_shortcut">İnternet kısayol dosyası(%s)</string>
     <string name="upload_file_dialog_filetype_snippet_text">Kod parçası metin dosyası(.txt)</string>
     <string name="upload_file_dialog_title">Yüklenecek dosya adını ve dosya türünü belirtin</string>
     <string name="upload_files">Dosyaları yükle</string>

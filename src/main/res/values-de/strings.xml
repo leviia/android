@@ -150,8 +150,10 @@
     <string name="conflict_already_existing_file">Bereits existierende Datei</string>
     <string name="conflict_dialog_error">Fehler beim Erstellen des Konfliktdialoges</string>
     <string name="conflict_file_headline">Konflikt-Datei %1$s</string>
+    <string name="conflict_local_file">Lokale Datei</string>
     <string name="conflict_message_description">Falls beide Versionen gewählt werden, wird bei der lokalen Datei eine Zahl am Ende des Dateinamens hinzugefügt.</string>
     <string name="conflict_new_file">Neue Datei</string>
+    <string name="conflict_server_file">Server-Datei</string>
     <string name="contactlist_item_icon">Nutzericon für Kontaktliste</string>
     <string name="contactlist_no_permission">Keine Berechtigung vergeben, es wurde nichts importiert.</string>
     <string name="contacts">Kontakte</string>
@@ -257,6 +259,7 @@
     <string name="error_choosing_date">Fehler beim Auswählen des Datums</string>
     <string name="error_comment_file">Fehler beim Kommentieren der Datei</string>
     <string name="error_crash_title">%1$s abgestürzt</string>
+    <string name="error_creating_file_from_template">Fehler beim Erzeugen einer Datei aus der Vorlage</string>
     <string name="error_report_issue_action">Melden</string>
     <string name="error_report_issue_text">Problem melden? (benötigt ein Github-Konto)</string>
     <string name="error_retrieving_file">Fehler beim Abruf der Datei</string>
@@ -300,6 +303,7 @@
     <string name="file_list_empty">Laden Sie Inhalt hoch oder synchronisieren Sie mit Ihren Geräten.</string>
     <string name="file_list_empty_favorite_headline">Noch keine Favoriten vorhanden</string>
     <string name="file_list_empty_favorites_filter_list">Dateien und Ordner, die als Favoriten markiert werden, erscheinen hier.</string>
+    <string name="file_list_empty_gallery">Keine Bilder oder Videos gefunden</string>
     <string name="file_list_empty_headline"> Keine Dateien vorhanden </string>
     <string name="file_list_empty_headline_search">Keine Ergebnisse in diesem Ordner</string>
     <string name="file_list_empty_headline_server_search">Keine Ergebnisse</string>
@@ -310,6 +314,7 @@
     <string name="file_list_empty_search">Vielleicht befindet es sich in einem anderen Ordner?</string>
     <string name="file_list_empty_shared">Von Ihnen geteilte Dateien und Ordner werden hier angezeigt.</string>
     <string name="file_list_empty_shared_headline">Noch nichts geteilt</string>
+    <string name="file_list_empty_unified_search_no_results">Keine Ergebnisse für Ihre Suche gefunden</string>
     <string name="file_list_folder">Ordner</string>
     <string name="file_list_loading">Lade…</string>
     <string name="file_list_no_app_for_file_type">Es wurde keine App für diesen Dateityp gefunden.</string>
@@ -374,7 +379,7 @@
     <string name="forward">Weiterleiten</string>
     <string name="fourHours">4 Stunden</string>
     <string name="fullscreen">Vollbild</string>
-    <string name="hidden_file_name_warning">Name führt zu einer versteckten Datei</string>
+    <string name="hidden_file_name_warning">Dateiname führt dazu, das die Datei versteckt sein wird.</string>
     <string name="hint_name">Name</string>
     <string name="hint_note">Notiz</string>
     <string name="hint_password">Passwort</string>
@@ -624,7 +629,6 @@
     <string name="share_internal_link_to_folder_text">Der interne Freigabelink funktioniert nur für Benutzer mit Zugriff auf diesen Ordner</string>
     <string name="share_known_remote_on_clarification">auf %1$s</string>
     <string name="share_link">Link teilen</string>
-    <string name="share_link_empty_note_message">Bitte Notiz eingeben.</string>
     <string name="share_link_empty_password">Sie müssen ein Passwort eingeben</string>
     <string name="share_link_file_error">Es ist ein Fehler beim Freigeben der Datei oder des Ordners aufgetreten.</string>
     <string name="share_link_file_no_exist">Teilen nicht möglich. Bitte prüfen Sie, ob die Datei existiert.</string>
@@ -634,7 +638,6 @@
     <string name="share_link_with_label">Teile Link (%1$s)</string>
     <string name="share_no_expiration_date_label">Ablaufdatum setzen</string>
     <string name="share_no_password_title">Passwort setzen</string>
-    <string name="share_open_in">Öffnen mit…</string>
     <string name="share_password_title">Passwortgeschützt</string>
     <string name="share_permission_can_edit">Kann bearbeiten</string>
     <string name="share_permission_file_drop">Dateiablage</string>
