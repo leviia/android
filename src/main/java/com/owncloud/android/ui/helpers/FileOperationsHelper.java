@@ -405,7 +405,6 @@ public class FileOperationsHelper {
             String guessedMimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(fileExt);
             if (guessedMimeType != null) {
                 openFileWithIntent = new Intent(Intent.ACTION_VIEW);
-                openFileWithIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                 openFileWithIntent.setDataAndType(
                         fileUri,
                         guessedMimeType
@@ -883,16 +882,14 @@ public class FileOperationsHelper {
     }
 
     public void toggleFavoriteFiles(Collection<OCFile> files, boolean shouldBeFavorite) {
-        List<OCFile> alreadyRightStateList = new ArrayList<>();
+        List<OCFile> toToggle = new ArrayList<>();
         for (OCFile file : files) {
-            if (file.isFavorite() == shouldBeFavorite) {
-                alreadyRightStateList.add(file);
+            if (file.isFavorite() != shouldBeFavorite) {
+                toToggle.add(file);
             }
         }
 
-        files.removeAll(alreadyRightStateList);
-
-        for (OCFile file : files) {
+        for (OCFile file : toToggle) {
             toggleFavoriteFile(file, shouldBeFavorite);
         }
     }

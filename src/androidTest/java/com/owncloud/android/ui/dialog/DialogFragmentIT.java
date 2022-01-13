@@ -84,6 +84,12 @@ public class DialogFragmentIT extends AbstractIT {
     @Rule public IntentsTestRule<FileDisplayActivity> activityRule =
         new IntentsTestRule<>(FileDisplayActivity.class, true, false);
 
+    private FileDisplayActivity getFileDisplayActivity() {
+        Intent intent = new Intent(targetContext, FileDisplayActivity.class);
+        return activityRule.launchActivity(intent);
+    }
+
+
     @After
     public void quitLooperIfNeeded() {
         if (Looper.myLooper() != null) {
@@ -177,7 +183,8 @@ public class DialogFragmentIT extends AbstractIT {
     @Test
     @ScreenshotTest
     public void testAccountChooserDialog() throws AccountUtils.AccountNotFoundException {
-        UserAccountManager userAccountManager = activityRule.getActivity().getUserAccountManager();
+        FileDisplayActivity activity = getFileDisplayActivity();
+        UserAccountManager userAccountManager = activity.getUserAccountManager();
         AccountManager accountManager = AccountManager.get(targetContext);
         for (Account account : accountManager.getAccountsByType(MainApp.getAccountType(targetContext))) {
             accountManager.removeAccountExplicitly(account);
@@ -210,13 +217,14 @@ public class DialogFragmentIT extends AbstractIT {
                                                                        new OwnCloudAccount(newAccount, targetContext),
                                                                        new Server(URI.create(SERVER_URL),
                                                                                   OwnCloudVersion.nextcloud_20)));
-        FileDisplayActivity activity = showDialog(sut);
+        showDialog(activity, sut);
 
         activity.runOnUiThread(() -> sut.setStatus(new Status(StatusType.DND,
                                                               "Busy fixing 🐛…",
                                                               "",
                                                               -1),
                                                    targetContext));
+        waitForIdleSync();
         shortSleep();
         screenshot(sut, "dnd");
 
@@ -225,6 +233,7 @@ public class DialogFragmentIT extends AbstractIT {
                                                               "",
                                                               -1),
                                                    targetContext));
+        waitForIdleSync();
         shortSleep();
         screenshot(sut, "online");
 
@@ -233,14 +242,17 @@ public class DialogFragmentIT extends AbstractIT {
                                                               "🎉",
                                                               -1),
                                                    targetContext));
+        waitForIdleSync();
         shortSleep();
         screenshot(sut, "fun");
 
         activity.runOnUiThread(() -> sut.setStatus(new Status(StatusType.OFFLINE, "", "", -1), targetContext));
+        waitForIdleSync();
         shortSleep();
         screenshot(sut, "offline");
 
         activity.runOnUiThread(() -> sut.setStatus(new Status(StatusType.AWAY, "Vacation", "🌴", -1), targetContext));
+        waitForIdleSync();
         shortSleep();
         screenshot(sut, "away");
     }
@@ -259,7 +271,8 @@ public class DialogFragmentIT extends AbstractIT {
         accountManager.setUserData(newAccount, AccountUtils.Constants.KEY_USER_ID, "test");
         accountManager.setAuthToken(newAccount, AccountTypeUtils.getAuthTokenTypePass(newAccount.type), "password");
 
-        UserAccountManager userAccountManager = activityRule.getActivity().getUserAccountManager();
+        FileDisplayActivity fda = getFileDisplayActivity();
+        UserAccountManager userAccountManager = fda.getUserAccountManager();
         User newUser = userAccountManager.getUser(newAccount.name).get();
         FileDataStorageManager fileDataStorageManager = new FileDataStorageManager(newUser,
                                                                                    targetContext.getContentResolver());
@@ -274,7 +287,7 @@ public class DialogFragmentIT extends AbstractIT {
                                                                        new OwnCloudAccount(newAccount, targetContext),
                                                                        new Server(URI.create(SERVER_URL),
                                                                                   OwnCloudVersion.nextcloud_20)));
-        showDialog(sut);
+        showDialog(fda, sut);
     }
 
     @Test
@@ -429,8 +442,17 @@ public class DialogFragmentIT extends AbstractIT {
 
     private FileDisplayActivity showDialog(DialogFragment dialog) {
         Intent intent = new Intent(targetContext, FileDisplayActivity.class);
-        FileDisplayActivity sut = activityRule.launchActivity(intent);
 
+        FileDisplayActivity sut = activityRule.getActivity();
+
+        if (sut == null) {
+            sut = activityRule.launchActivity(intent);
+        }
+
+        return showDialog(sut, dialog);
+    }
+
+    private FileDisplayActivity showDialog(FileDisplayActivity sut, DialogFragment dialog) {
         dialog.show(sut.getSupportFragmentManager(), "");
 
         getInstrumentation().waitForIdleSync();

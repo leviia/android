@@ -54,7 +54,7 @@
     <string name="prefs_daily_backup_summary">Daily backup of your calendar &amp; contacts</string>
     <string name="prefs_sycned_folders_summary">Manage folders for auto upload</string>
     <string name="prefs_help">Help</string>
-    <string name="prefs_recommend">Recommend to friend</string>
+    <string name="prefs_recommend">Recommend to a friend</string>
     <string name="prefs_imprint">Imprint</string>
     <string name="prefs_value_theme_light">Light</string>
     <string name="prefs_value_theme_dark">Dark</string>
@@ -1006,4 +1006,5 @@
     <string name="file_list_empty_unified_search_no_results">No results found for your query</string>
     <string name="file_list_empty_gallery">Found no images or videos</string>
     <string name="error_creating_file_from_template">Error creating file from template</string>
+    <string name="no_send_app">No app available for sending the selected files</string>
 </resources>
