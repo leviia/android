@@ -461,6 +461,7 @@
     <string name="no_email_app_available">Nessuna app disponibile per gestire l\'indirizzo email</string>
     <string name="no_mutliple_accounts_allowed">Solo un account consentito</string>
     <string name="no_pdf_app_available">Nessun applicazione disponibile per gestire i PDF</string>
+    <string name="no_send_app">Nessuna app disponibile per inviare i file selezionati</string>
     <string name="no_share_permission_selected">Seleziona almeno un permesso da condividere.</string>
     <string name="note_confirm">Invia</string>
     <string name="note_could_not_sent">Impossibile inviare la nota</string>
@@ -549,6 +550,7 @@
     <string name="prefs_lock_using_device_credentials">Credenziali di dispositivo</string>
     <string name="prefs_lock_using_passcode">Codice di sicurezza</string>
     <string name="prefs_manage_accounts">Gestisci account</string>
+    <string name="prefs_recommend">Consiglia ad un amico</string>
     <string name="prefs_show_hidden_files">Mostra i file nascosti</string>
     <string name="prefs_sourcecode">Ottieni codice sorgente</string>
     <string name="prefs_storage_path">Cartella di archiviazione dei dati</string>

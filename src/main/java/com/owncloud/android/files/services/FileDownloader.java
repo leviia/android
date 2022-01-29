@@ -579,7 +579,7 @@ public class FileDownloader extends Service
         showDetailsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         mNotificationBuilder.setContentIntent(PendingIntent.getActivity(this, (int) System.currentTimeMillis(),
-                showDetailsIntent, 0));
+                                                                        showDetailsIntent, PendingIntent.FLAG_IMMUTABLE));
 
 
         if (mNotificationManager == null) {
@@ -632,6 +632,9 @@ public class FileDownloader extends Service
 
         if (!downloadResult.isCancelled()) {
             if (downloadResult.isSuccess()) {
+                if (conflictUploadId > 0) {
+                    uploadsStorageManager.removeUpload(conflictUploadId);
+                }
                 // Dont show notification except an error has occured.
                 return;
             }
@@ -656,7 +659,7 @@ public class FileDownloader extends Service
                 // TODO put something smart in showDetailsIntent
                 Intent showDetailsIntent = new Intent();
                 mNotificationBuilder.setContentIntent(PendingIntent.getActivity(this, (int) System.currentTimeMillis(),
-                        showDetailsIntent, 0));
+                                                                                showDetailsIntent, PendingIntent.FLAG_IMMUTABLE));
             }
 
             mNotificationBuilder.setContentText(ErrorMessageAdapter.getErrorCauseMessage(downloadResult,
@@ -667,10 +670,6 @@ public class FileDownloader extends Service
 
                 // Remove success notification
                 if (downloadResult.isSuccess()) {
-                    if (conflictUploadId > 0) {
-                        uploadsStorageManager.removeUpload(conflictUploadId);
-                    }
-
                     // Sleep 2 seconds, so show the notification before remove it
                     NotificationUtils.cancelWithDelay(mNotificationManager,
                                                       R.string.downloader_download_succeeded_ticker, 2000);
@@ -690,8 +689,12 @@ public class FileDownloader extends Service
         updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
         updateAccountCredentials.addFlags(Intent.FLAG_FROM_BACKGROUND);
-        mNotificationBuilder.setContentIntent(PendingIntent.getActivity(this, (int) System.currentTimeMillis(),
-                updateAccountCredentials, PendingIntent.FLAG_ONE_SHOT));
+        mNotificationBuilder.setContentIntent(
+            PendingIntent.getActivity(this,
+                                      (int) System.currentTimeMillis(),
+                                      updateAccountCredentials,
+                                      PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE)
+                                             );
     }
 
 

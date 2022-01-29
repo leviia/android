@@ -19,13 +19,13 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.4'
+        classpath 'com.android.tools.build:gradle:7.1.0'
         classpath 'com.hiya:jacoco-android:0.2'
-        classpath 'com.github.spotbugs.snom:spotbugs-gradle-plugin:5.0.4'
+        classpath 'com.github.spotbugs.snom:spotbugs-gradle-plugin:5.0.5'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.19.0"
         classpath "commons-httpclient:commons-httpclient:3.1@jar" // remove after entire switch to lib v2
-        classpath 'com.karumi:shot:5.11.2'
+        classpath 'com.karumi:shot:5.13.0'
         classpath "org.jacoco:org.jacoco.core:$jacoco_version"
         classpath "org.jacoco:org.jacoco.report:$jacoco_version"
         classpath "org.jacoco:org.jacoco.agent:$jacoco_version"
@@ -65,10 +65,10 @@ ext {
     markwonVersion =  "4.6.2"
     prismVersion = "2.0.0"
     androidLibraryVersion = "master-SNAPSHOT"
-    mockitoVersion = "4.2.0"
+    mockitoVersion = "4.3.1"
     mockkVersion = "1.12.2"
     powermockVersion = "2.0.9"
-    byteBuddyVersion = "1.12.6"
+    byteBuddyVersion = "1.12.7"
     espressoVersion = "3.4.0"
     workRuntime = "2.7.1"
     fidoVersion = "4.1.0"
@@ -87,8 +87,8 @@ repositories {
 
 // semantic versioning for version code
 def versionMajor = 4
-def versionMinor = 0
-def versionPatch = 8
+def versionMinor = 1
+def versionPatch = 0
 def versionBuild = 0 // 0-50=Alpha / 51-98=RC / 90-99=stable
 
 for (TaskExecutionRequest tr : getGradle().getStartParameter().getTaskRequests()) {
@@ -102,20 +102,6 @@ for (TaskExecutionRequest tr : getGradle().getStartParameter().getTaskRequests()
 }
 
 android {
-    lintOptions {
-        checkGeneratedSources = true
-        abortOnError false
-        htmlReport true
-        htmlOutput file("$project.buildDir/reports/lint/lint.html")
-        disable 'MissingTranslation',
-            'GradleDependency',
-            'VectorPath',
-            'IconMissingDensityFolder',
-            'IconDensities',
-            'GoogleAppIndexingWarning',
-            'MissingDefaultResource',
-            'InvalidPeriodicWorkRequestInterval' // crashes due to a bug in lint itself
-    }
 
     compileSdkVersion 31
 
@@ -193,10 +179,10 @@ android {
 
     // adapt structure from Eclipse to Gradle/Android Studio expectations;
     // see http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Configuring-the-Structure
-
     packagingOptions {
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/LICENSE'
+        resources {
+            excludes += ['META-INF/LICENSE.txt', 'META-INF/LICENSE']
+        }
     }
 
     tasks.register("checkstyle", Checkstyle) {
@@ -239,6 +225,14 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    lint {
+        abortOnError false
+        checkGeneratedSources true
+        disable 'MissingTranslation', 'GradleDependency', 'VectorPath', 'IconMissingDensityFolder', 'IconDensities', 'GoogleAppIndexingWarning', 'MissingDefaultResource', 'InvalidPeriodicWorkRequestInterval', 'StringFormatInvalid', 'MissingQuantity'
+        htmlOutput file("$project.buildDir/reports/lint/lint.html")
+        htmlReport true
+    }
 }
 
 dependencies {
@@ -252,9 +246,9 @@ dependencies {
     compileOnly 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2' // remove after entire switch to lib v2
     implementation "commons-httpclient:commons-httpclient:3.1@jar" // remove after entire switch to lib v2
     implementation 'org.apache.jackrabbit:jackrabbit-webdav:2.13.5' // remove after entire switch to lib v2
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.google.android.material:material:1.5.0'
     implementation 'com.jakewharton:disklrucache:2.0.2'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'androidx.webkit:webkit:1.4.0'
@@ -263,7 +257,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
     implementation "androidx.work:work-runtime:$workRuntime"
     implementation "androidx.work:work-runtime-ktx:$workRuntime"
-    implementation "androidx.fragment:fragment-ktx:1.4.0"
+    implementation "androidx.fragment:fragment-ktx:1.4.1"
     implementation 'com.github.albfernandez:juniversalchardet:2.3.2' // need this version for Android <7
     compileOnly 'com.google.code.findbugs:annotations:3.0.1u2'
     implementation 'commons-io:commons-io:2.11.0'
@@ -274,7 +268,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.9'
     implementation 'com.afollestad:sectioned-recyclerview:0.5.0'
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.23'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.24'
     implementation 'com.github.tobiaskaminsky:qrcodescanner:0.1.2.4' // 'com.github.blikoon:QRCodeScanner:0.1.2'
     implementation 'com.google.android:flexbox:2.0.1'
     implementation 'org.parceler:parceler-api:1.1.13'
