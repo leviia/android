@@ -259,6 +259,7 @@ public class OCFileListFragment extends ExtendedListFragment implements
         Log_OC.i(TAG, "onAttach");
         try {
             mContainerActivity = (FileFragment.ContainerActivity) context;
+            setTitle();
 
         } catch (ClassCastException e) {
             throw new IllegalArgumentException(context.toString() + " must implement " +
@@ -985,6 +986,8 @@ public class OCFileListFragment extends ExtendedListFragment implements
                         }
                     } else if (file.isDown() && MimeTypeUtil.isVCard(file)) {
                         ((FileDisplayActivity) mContainerActivity).startContactListFragment(file);
+                    } else if (file.isDown() && MimeTypeUtil.isPDF(file)) {
+                        ((FileDisplayActivity) mContainerActivity).startPdfPreview(file);
                     } else if (PreviewTextFileFragment.canBePreviewed(file)) {
                         setFabVisible(false);
                         resetHeaderScrollingState();
@@ -1498,7 +1501,11 @@ public class OCFileListFragment extends ExtendedListFragment implements
         prepareCurrentSearch(event);
         searchFragment = true;
         setEmptyListLoadingMessage();
-        mAdapter.setData(new ArrayList<>(), SearchType.NO_SEARCH, mContainerActivity.getStorageManager(), mFile, true);
+        mAdapter.setData(new ArrayList<>(),
+                         SearchType.NO_SEARCH,
+                         mContainerActivity.getStorageManager(),
+                         mFile,
+                         true);
 
         setFabVisible(false);
 

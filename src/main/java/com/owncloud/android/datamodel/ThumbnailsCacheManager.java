@@ -163,7 +163,7 @@ public final class ThumbnailsCacheManager {
      * Converts size of file icon from dp to pixel
      * @return int
      */
-    private static int getThumbnailDimension(){
+    public static int getThumbnailDimension() {
         // Converts dp to pixel
         Resources r = MainApp.getAppContext().getResources();
         return Math.round(r.getDimension(R.dimen.file_icon_size_grid));
@@ -952,7 +952,7 @@ public final class ThumbnailsCacheManager {
                         mClient = OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount, mContext);
                     }
 
-                    int px = getAvatarDimension();
+                    int px = mResources.getInteger(R.integer.file_avatar_px);
                     String uri = mClient.getBaseUri() + "/index.php/avatar/" + Uri.encode(mUserId) + "/" + px;
                     Log_OC.d("Avatar", "URI: " + uri);
                     get = new GetMethod(uri);

@@ -722,7 +722,7 @@ public class FileContentProvider extends ContentProvider {
 
     private boolean checkIfColumnExists(SQLiteDatabase database, String table, String column) {
         Cursor cursor = database.rawQuery("SELECT * FROM " + table + " LIMIT 0", null);
-        boolean exists = cursor.getColumnIndexOrThrow(column) != -1;
+        boolean exists = cursor.getColumnIndex(column) != -1;
         cursor.close();
 
         return exists;
@@ -916,7 +916,7 @@ public class FileContentProvider extends ContentProvider {
                        + ProviderTableMeta._ID + " INTEGER PRIMARY KEY, "          // id
                        + ProviderTableMeta.VIRTUAL_TYPE + " TEXT, "                // type
                        + ProviderTableMeta.VIRTUAL_OCFILE_ID + " INTEGER )"        // file id
-        );
+                  );
     }
 
     private void createFileSystemTable(SQLiteDatabase db) {
