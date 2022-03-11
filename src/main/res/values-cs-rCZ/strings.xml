@@ -261,10 +261,11 @@
     <string name="error_crash_title">%1$s zhavarovalo</string>
     <string name="error_creating_file_from_template">Chyba při vytváření souboru ze šablony</string>
     <string name="error_report_issue_action">Hlášení</string>
-    <string name="error_report_issue_text">Nahlásit problém? (vyžaduje Github účet)</string>
+    <string name="error_report_issue_text">Nahlásit problém? (vyžaduje GitHub účet)</string>
     <string name="error_retrieving_file">Chyba při získávání souboru</string>
     <string name="error_retrieving_templates">Chyba při získávání šablon</string>
     <string name="error_starting_direct_camera_upload">Chyba při spouštění kamery</string>
+    <string name="error_starting_scan_doc">Chyb při použití skenování dokumentů</string>
     <string name="etm_accounts">Účty</string>
     <string name="etm_background_job_name">Název úlohy</string>
     <string name="etm_background_job_progress">Průběh</string>
@@ -497,6 +498,7 @@
     <string name="pass_code_removed">Bezpečnostní kód odstraněn</string>
     <string name="pass_code_stored">Bezpečnostní kód uložen</string>
     <string name="pass_code_wrong">Nesprávný bezpečnostní kód</string>
+    <string name="pdf_zoom_tip">Pokud chcete stránku zvětšit, klepněte na ni</string>
     <string name="permission_allow">Povolit</string>
     <string name="permission_deny">Odepřít</string>
     <string name="permission_storage_access">Vyžadována dodatečná oprávnění pro nahrávání a stahování souborů.</string>
@@ -812,6 +814,7 @@ Jak vývojová tak produkční verze je k dispozici na F-droid a mohou být nain
     <string name="upload_lock_failed">Uzamčení složky se nezdařilo</string>
     <string name="upload_old_android">Šifrování je možné pouze pro systém Android verze 5.0 a novější</string>
     <string name="upload_query_move_foreign_files">Pro zkopírování vybraných souborů do složky %1$s není dostatek volného místa. Chcete je tam namísto toho přesunout?</string>
+    <string name="upload_scan_doc_upload">Naskenovat dokument kamerou</string>
     <string name="upload_sync_conflict">Konflikt synchronizace, vyřešte ručně</string>
     <string name="upload_unknown_error">Neznámá chyba</string>
     <string name="uploader_btn_alternative_text">Vybrat</string>

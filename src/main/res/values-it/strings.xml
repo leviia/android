@@ -190,7 +190,7 @@
     <string name="delete_account">Rimuovi account</string>
     <string name="delete_account_warning">Rimuovere l\'account %s e tutti i file salvati localmente?\n\nIl processo non può essere annullato.</string>
     <string name="delete_entries">Elimina voci</string>
-    <string name="delete_link">Elimina link</string>
+    <string name="delete_link">Elimina collegamento</string>
     <string name="deselect_all">Deseleziona tutto</string>
     <string name="destination_filename">Filename di destinazione</string>
     <string name="dev_version_new_version_available">Nuova versione disponibile</string>
@@ -265,6 +265,7 @@
     <string name="error_retrieving_file">Errore durante il recupero del file</string>
     <string name="error_retrieving_templates">Errore durante il recupero dei modelli</string>
     <string name="error_starting_direct_camera_upload">Errore  di avvio della fotocamera</string>
+    <string name="error_starting_scan_doc">Errore durante l\'utilizzo della scansione del documento</string>
     <string name="etm_accounts">Account</string>
     <string name="etm_background_job_name">Nome operazione</string>
     <string name="etm_background_job_progress">Avanzamento</string>
@@ -314,7 +315,7 @@
     <string name="file_list_empty_search">Forse è in una cartella diversa?</string>
     <string name="file_list_empty_shared">I file e le cartelle che condividi saranno mostrati qui.</string>
     <string name="file_list_empty_shared_headline">Ancora nessuna condivisione</string>
-    <string name="file_list_empty_unified_search_no_results">Nessun risultato trovato per la tua query</string>
+    <string name="file_list_empty_unified_search_no_results">Nessun risultato trovato per la tua interrogazione</string>
     <string name="file_list_folder">cartella</string>
     <string name="file_list_loading">Caricamento in corso…</string>
     <string name="file_list_no_app_for_file_type">Nessuna applicazione configurata per gestire questo tipo di file.</string>
@@ -468,7 +469,7 @@
     <string name="note_icon_hint">Icona della nota</string>
     <string name="notification_action_failed">Esecuzione dell\'azione non riuscita.</string>
     <string name="notification_channel_download_description">Mostra l\'avanzamento degli scaricamenti</string>
-    <string name="notification_channel_download_name_short">Download</string>
+    <string name="notification_channel_download_name_short">Scaricamenti</string>
     <string name="notification_channel_file_sync_description">Mostra l\'avanzamento e i risultati della sincronizzazione file</string>
     <string name="notification_channel_file_sync_name">Sincronizzazione file</string>
     <string name="notification_channel_general_description">Mostra notifiche per le nuove cartelle multimediali e simili</string>
@@ -497,6 +498,7 @@
     <string name="pass_code_removed">Codice segreto eliminato</string>
     <string name="pass_code_stored">Codice segreto memorizzato</string>
     <string name="pass_code_wrong">Codice segreto non corretto</string>
+    <string name="pdf_zoom_tip">Tocca una pagina per ingrandire</string>
     <string name="permission_allow">Consenti</string>
     <string name="permission_deny">Nega</string>
     <string name="permission_storage_access">Permessi aggiuntivi richiesti per caricare e scaricare i file.</string>
@@ -550,7 +552,7 @@
     <string name="prefs_lock_using_device_credentials">Credenziali di dispositivo</string>
     <string name="prefs_lock_using_passcode">Codice di sicurezza</string>
     <string name="prefs_manage_accounts">Gestisci account</string>
-    <string name="prefs_recommend">Consiglia ad un amico</string>
+    <string name="prefs_recommend">Consiglia a un amico</string>
     <string name="prefs_show_hidden_files">Mostra i file nascosti</string>
     <string name="prefs_sourcecode">Ottieni codice sorgente</string>
     <string name="prefs_storage_path">Cartella di archiviazione dei dati</string>
@@ -619,7 +621,7 @@
     <string name="set_status">Imposta stato</string>
     <string name="set_status_message">Imposta messaggio di stato</string>
     <string name="share">Condividi</string>
-    <string name="share_copy_link">Condividi &amp; Copia il link</string>
+    <string name="share_copy_link">Condividi &amp; Copia il collegamento</string>
     <string name="share_dialog_title">Condivisione</string>
     <string name="share_expiration_date_format">%1$s</string>
     <string name="share_expiration_date_label">Scade il %1$s</string>
@@ -641,6 +643,7 @@
     <string name="share_no_password_title">Imposta password</string>
     <string name="share_password_title">Protetta da password</string>
     <string name="share_permission_can_edit">Può modificare</string>
+    <string name="share_permission_file_drop">Elimina file</string>
     <string name="share_permission_view_only">Sola lettura</string>
     <string name="share_permissions">Condividi permessi</string>
     <string name="share_remote_clarification">%1$s (remota)</string>
@@ -790,6 +793,7 @@
     <string name="upload_lock_failed">Blocco della cartella non riuscito</string>
     <string name="upload_old_android">La cifratura è possibile solo con &gt;= Android 5.0</string>
     <string name="upload_query_move_foreign_files">La mancanza di spazio impedisce di copiare i file selezionati nella cartella %1$s. Vuoi spostarli in quella cartella?</string>
+    <string name="upload_scan_doc_upload">Scansiona il documento dalla fotocamera</string>
     <string name="upload_sync_conflict">Conflitto di sincronizzazione, risolvi manualmente</string>
     <string name="upload_unknown_error">Errore sconosciuto</string>
     <string name="uploader_btn_alternative_text">Scegli</string>

@@ -64,8 +64,8 @@ ext {
 	daggerVersion = "2.40.5"
     markwonVersion =  "4.6.2"
     prismVersion = "2.0.0"
-    androidLibraryVersion = "master-SNAPSHOT"
-    mockitoVersion = "4.3.1"
+    androidLibraryVersion = "2.9.1"
+    mockitoVersion = "4.2.0"
     mockkVersion = "1.12.2"
     powermockVersion = "2.0.9"
     byteBuddyVersion = "1.12.7"
@@ -86,10 +86,10 @@ repositories {
 }
 
 // semantic versioning for version code
-def versionMajor = 4
-def versionMinor = 1
-def versionPatch = 0
-def versionBuild = 0 // 0-50=Alpha / 51-98=RC / 90-99=stable
+def versionMajor = 3
+def versionMinor = 19
+def versionPatch = 1
+def versionBuild = 90 // 0-50=Alpha / 51-98=RC / 90-99=stable
 
 for (TaskExecutionRequest tr : getGradle().getStartParameter().getTaskRequests()) {
     for (String arg : tr.args) {
@@ -150,7 +150,7 @@ android {
                 applicationId '${leviia_app_idb}'
                 dimension "default"
             }
-            
+
             huawei {
                 applicationId 'com.nextcloud.client'
                 dimension "default"
@@ -257,8 +257,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
     implementation "androidx.work:work-runtime:$workRuntime"
     implementation "androidx.work:work-runtime-ktx:$workRuntime"
-    implementation "androidx.fragment:fragment-ktx:1.4.1"
-    implementation 'com.github.albfernandez:juniversalchardet:2.3.2' // need this version for Android <7
+    implementation "androidx.fragment:fragment-ktx:1.4.0"
+    implementation 'com.github.albfernandez:juniversalchardet:2.0.3' // need this version for Android <7
     compileOnly 'com.google.code.findbugs:annotations:3.0.1u2'
     implementation 'commons-io:commons-io:2.11.0'
     implementation 'org.greenrobot:eventbus:3.3.1'
