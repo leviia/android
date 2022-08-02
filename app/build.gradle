@@ -112,12 +112,12 @@ android {
         productFlavors {
             // used for f-droid
             generic {
-                applicationId 'com.nextcloud.client'
+                applicationId '${leviia_app_idb}'
                 dimension "default"
             }
 
             gplay {
-                applicationId 'com.nextcloud.client'
+                applicationId '${leviia_app_idb}'
                 dimension "default"
             }
 
@@ -273,7 +273,7 @@ dependencies {
     implementation "com.google.android.exoplayer:extension-okhttp:$exoplayerVersion"
 
     implementation 'me.zhanghai.android.fastscroll:library:1.1.8'
-    
+
     // Shimmer animation
     implementation 'io.github.elye:loaderviewlibrary:3.0.0'
 

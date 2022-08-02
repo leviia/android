@@ -310,44 +310,6 @@ public abstract class DrawerActivity extends ToolbarActivity
             // set background to primary color
             LinearLayout drawerHeader = mNavigationViewHeader.findViewById(R.id.drawer_header_view);
             drawerHeader.setBackgroundColor(ThemeColorUtils.unchangedPrimaryColor(getAccount(), this));
-
-            if (!TextUtils.isEmpty(logo) && URLUtil.isValidUrl(logo)) {
-                // background image
-                GenericRequestBuilder<Uri, InputStream, SVGorImage, Bitmap> requestBuilder = Glide.with(this)
-                    .using(Glide.buildStreamModelLoader(Uri.class, this), InputStream.class)
-                    .from(Uri.class)
-                    .as(SVGorImage.class)
-                    .transcode(new SvgOrImageBitmapTranscoder(128, 128), Bitmap.class)
-                    .sourceEncoder(new StreamEncoder())
-                    .cacheDecoder(new FileToStreamDecoder<>(new SvgOrImageDecoder()))
-                    .decoder(new SvgOrImageDecoder());
-
-                // background image
-                SimpleTarget target = new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
-
-                        Bitmap logo = resource;
-                        int width = resource.getWidth();
-                        int height = resource.getHeight();
-                        int max = Math.max(width, height);
-                        if (max > MAX_LOGO_SIZE_PX) {
-                            logo = BitmapUtils.scaleBitmap(resource, MAX_LOGO_SIZE_PX, width, height, max);
-                        }
-
-                        Drawable[] drawables = {new ColorDrawable(primaryColor), new BitmapDrawable(logo)};
-                        LayerDrawable layerDrawable = new LayerDrawable(drawables);
-
-                        String name = capability.getServerName();
-                        setDrawerHeaderLogo(layerDrawable, name);
-                    }
-                };
-
-                requestBuilder
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .load(Uri.parse(logo))
-                    .into(target);
-            }
         }
     }
 

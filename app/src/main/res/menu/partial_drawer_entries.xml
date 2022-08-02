@@ -99,7 +99,8 @@
             android:id="@+id/nav_community"
             android:icon="@drawable/nav_community"
             android:orderInCategory="4"
-            android:title="@string/drawer_community" />
+            android:title="@string/drawer_community"
+            android:visible="false" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/nav_logout"

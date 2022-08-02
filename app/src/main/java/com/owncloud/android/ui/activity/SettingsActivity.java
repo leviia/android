@@ -392,10 +392,7 @@ public class SettingsActivity extends ThemedPreferenceActivity
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                     String appName = getString(R.string.app_name);
-                    String downloadUrlGooglePlayStore = getString(R.string.url_app_download);
-                    String downloadUrlFDroid = getString(R.string.fdroid_link);
-                    String downloadUrls = String.format(getString(R.string.recommend_urls),
-                            downloadUrlGooglePlayStore, downloadUrlFDroid);
+                    String downloadUrls = getString(R.string.provider_registration_server);
 
                     String recommendSubject = String.format(getString(R.string.recommend_subject), appName);
                     String recommendText = String.format(getString(R.string.recommend_text),
